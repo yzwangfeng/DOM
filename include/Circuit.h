@@ -1,11 +1,11 @@
 /*
- * Synthesis.h
+ * Circuit.h
  *
- * one-line synthesis
+ * circuit structure
  */
 
-#ifndef SYNTHESIS_H_
-#define SYNTHESIS_H_
+#ifndef CIRCUIT_H_
+#define CIRCUIT_H_
 
 #include <map>
 #include <set>
@@ -23,20 +23,20 @@ struct Var {
     string name;
     bool is_in, is_out;
 
-    vector<string> pre;
-    vector<string> next;
+    vector<string> pre;     // precursors
+    vector<string> suc;     // successors
 
-    int out_degree;
+    int out_degree;         // = suc.size()
 
     Var(string name_, bool is_in_, bool is_out_);
 };
 
 struct Circuit {
     string benchmark;
-    int abc_iter;
+    int abc_iter;           // file name = $benchmark$_$abc_iter$.blif
 
     map<string, Var*> graph;
-    int ope_num;
+    int graph_size;         // = graph.size()
 
     vector<string> input;
     vector<string> output;
@@ -44,10 +44,10 @@ struct Circuit {
     Circuit(string benchmark_);
     ~Circuit();
 
-    void abc_synthesize();  // synthesize a serial operation using abc library
+    void abc_synthesize();  // synthesize the circuit using a customized library
     void read_blif();
 
-    void write_dot();   // visualize the circuit
+    void write_dot();       // visualize the circuit
 };
 
-#endif /* SYNTHESIS_H_ */
+#endif /* CIRCUIT_H_ */

@@ -1,6 +1,6 @@
-#include "Synthesis.h"
+#include "Circuit.h"
 
-vector<string> split(string str, string separator) {    //  split a string by the separator
+vector<string> split(string str, string separator) {    // split a string by the separator
     vector<string> dest;
     string substring;
     string::size_type start = 0, index;
@@ -15,7 +15,7 @@ vector<string> split(string str, string separator) {    //  split a string by th
             }
         }
     } while (index != string::npos);
-    substring = str.substr(start);  // 最后一个子串
+    substring = str.substr(start);  // the last substring
     dest.push_back(substring);
     return dest;
 }
@@ -29,7 +29,7 @@ Var::Var(string name_, bool is_in_, bool is_out_)
 Circuit::Circuit(string benchmark_)
         :
         benchmark(benchmark_) {
-    abc_iter = ope_num = 0;
+    abc_iter = graph_size = 0;
     abc_synthesize();
     read_blif();
     //circuit.write_dot();
@@ -101,7 +101,7 @@ void Circuit::read_blif() {
         }
     }
 
-    ope_num = 0;
+    graph_size = 0;
     do {
         string gate;
         fin >> gate;
@@ -119,13 +119,13 @@ void Circuit::read_blif() {
         for (string cell : cells) {
             cell = cell.substr(2);
             if (cell != out_cell) {
-                graph[cell]->next.push_back(out_cell);
+                graph[cell]->suc.push_back(out_cell);
                 ++graph[cell]->out_degree;
                 graph[out_cell]->pre.push_back(cell);
             }
         }
 
-        ++ope_num;
+        ++graph_size;
     } while (fin >> s && s == ".gate");
 }
 
