@@ -21,34 +21,21 @@
 
 #define INF 1000000
 
-struct Cut{
+struct Cut {
     set<string> names;
-    int mindep, area;
+    int mindep, Area;
     double AreaFlow;
     Cut() {
-	mindep = 0;
-	area = 0;
-	AreaFlow = 0;
+        mindep = 0;
+        Area = 0;
+        AreaFlow = 0;
     }
-    Cut(set<string> n) {
-	names = n;
-	mindep = 0;
-	area = 0;
-	AreaFlow = 0;
+    Cut(set<string> n, int dep, int area, double AF) {
+        names = n;
+        mindep = dep;
+        Area = area;
+        AreaFlow = AF;
     }
-    bool operator < (const Cut& t) const {
-	return mindep < t.mindep;
-    }
-    bool operator == (const Cut& t) {
-	unsigned int cnt = 0;
-        for (string s1 : names)
-	    for (string s2: t.names) {
-		cnt += (s1 == s2);
-        }
-	cout << (bool)(cnt == names.size() && cnt == t.names.size()) << endl;
-	return cnt == names.size() && cnt == t.names.size();
-    }
-
 };
 
 struct Var {
@@ -57,7 +44,7 @@ struct Var {
 
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
-    set<set<string> > cuts; //cuts
+    set<set<string> > cuts;  //cuts
     set<string> Rcut;      //represent cut
 
     int out_degree;         // = suc.size()
