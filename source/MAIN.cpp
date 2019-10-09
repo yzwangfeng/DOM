@@ -61,9 +61,9 @@ int main(int argc, char *argv[]) {
     vector<string> benchmark;
     queue <string> Q;
     map<string, int> ind;
-    int Luts = 4;
-    unsigned int C = 8; // record the most C Cuts
-    string dir = "benchmark/test1";
+    int Luts = 6;
+    unsigned int C = 20; // record the most C Cuts
+    string dir = "benchmark/test";
     get_file_name(dir, benchmark);
 
     for (string str : benchmark) {
