@@ -42,7 +42,7 @@ Circuit::~Circuit() {
 }
 
 void Circuit::abc_synthesize() {
-    int min_cycle = INF, last_cycle = INF;
+    int min_cycle = inf, last_cycle = inf;
     char file[256], new_file[256];
     for (abc_iter = 1; abc_iter <= 100; ++abc_iter) {
         if (abc_iter == 1) {

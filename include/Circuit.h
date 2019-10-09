@@ -19,7 +19,7 @@
 
 #include "ABC.h"
 
-#define INF 1000000
+#define inf 100000000
 
 struct Cut {
     set<string> names;
