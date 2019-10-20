@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     map<string, int> ind;
     int Luts = 6;
     unsigned int C = 240;  // record the most C Cuts
-    string dir = "benchmark/ISCAS85";
+    string dir = "benchmark/new";
     string outdir = "result/new";
     get_file_name(dir, benchmark);
 
@@ -85,7 +85,6 @@ int main(int argc, char *argv[]) {
         clock_t start = clock();
 
         Circuit c = Circuit(dir + "/" + str);  // already synthesized
-        return 0;
         //c.write_dot();
 
         out = fopen((outdir + "/" + str + ".out").c_str(), "w");
