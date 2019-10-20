@@ -1,0 +1,8 @@
+# The area/delay of k-variable LUTs:
+# k  area   delay
+1      1      1
+2      2      2
+3      4      3
+4      8      4
+5     16      5
+6     32      6

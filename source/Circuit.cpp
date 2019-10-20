@@ -30,15 +30,23 @@ Circuit::Circuit(string benchmark_)
         :
         benchmark(benchmark_) {
     abc_iter = graph_size = 0;
+    memset(abc_lut, 0, sizeof(abc_lut));
+    abc_lut_area = 0;
+
     abc_synthesize();
     read_blif();
-    //circuit.write_dot();
+
+    abc_lut_map((char*) "6LUT.lutlib");     // change it to your own LUT library
+
+    //write_dot();
 }
 
 Circuit::~Circuit() {
-    char blif_file[256];
-    sprintf(blif_file, "%s_%d.blif", benchmark.c_str(), abc_iter);
+    char blif_file[256], lut_file[256];
+    sprintf(blif_file, "%s_%d.blif", benchmark.c_str(), abc_iter);  // abc synthesis result
+    sprintf(lut_file, "%s_lut.blif", benchmark.c_str());            // abc lut mapping file
     remove(blif_file);
+    remove(lut_file);
 }
 
 void Circuit::abc_synthesize() {
@@ -127,6 +135,59 @@ void Circuit::read_blif() {
 
         ++graph_size;
     } while (fin >> s && s == ".gate");
+    fin.close();
+}
+
+void Circuit::abc_lut_map(char *lib) {
+    char input_file[256], lut_file[256], lutlib_file[256];
+    sprintf(input_file, "%s", benchmark.c_str());
+    sprintf(lut_file, "%s_lut.blif", benchmark.c_str());
+    sprintf(lutlib_file, "abclib/%s.blif", lib);
+    abc_lutpack(input_file, lut_file, lib);
+
+    int area[10] = { }, delay[10] = { };
+    sprintf(lutlib_file, "abclib/%s.blif", lib);
+    ifstream fin_lut(lutlib_file, ios::in);
+    if (!fin_lut.is_open()) {
+        return;
+    }
+    string s;
+    getline(fin_lut, s);
+    getline(fin_lut, s);
+    int k;
+    while (fin_lut >> k) {
+        fin_lut >> area[k] >> delay[k];
+    }
+    fin_lut.close();
+
+    ifstream fin(lut_file, ios::in);
+    if (!fin.is_open()) {
+        return;
+    }
+    while (true) {
+        bool end = false;
+        while (fin >> s) {
+            if (s == ".names") {
+                break;
+            }
+            if (s == ".end") {
+                end = true;
+                break;
+            }
+        }
+        if (end) {
+            break;
+        }
+
+        getline(fin, s);
+        vector<string> names = split(s, " ");
+        ++abc_lut[names.size() - 2];
+    }
+    fin.close();
+
+    for (int i = 0; i < 10; ++i) {
+        abc_lut_area += abc_lut[i] * area[i];
+    }
 }
 
 void Circuit::write_dot() {

@@ -20,6 +20,7 @@
 #include "ABC.h"
 
 #define inf 100000000
+#define INF 100000000
 
 struct Cut {
     set<string> names;
@@ -64,11 +65,15 @@ struct Circuit {
     vector<string> input;
     vector<string> output;
 
+    int abc_lut[10];        // there are abc_lut[k] k-input LUTs after abc lut mapping
+    int abc_lut_area;       // total area after abc lut mapping
+
     Circuit(string benchmark_);
     ~Circuit();
 
     void abc_synthesize();  // synthesize the circuit using a customized library
     void read_blif();
+    void abc_lut_map(char* lib);
 
     void write_dot();       // visualize the circuit
 };

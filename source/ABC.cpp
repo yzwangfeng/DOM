@@ -68,7 +68,7 @@ int abc_map(char* in_file, char* out_file, char* lib) {  // 调用abc的map指�
 	Abc_Start();
 	pAbc = Abc_FrameGetGlobalFrame();
 
-	sprintf(Command, "read_library genlib/%s", lib);
+	sprintf(Command, "read_library abclib/%s", lib);
 	if (Cmd_CommandExecute(pAbc, Command)) {
 		fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
 		return 1;
@@ -113,4 +113,39 @@ int abc_map(char* in_file, char* out_file, char* lib) {  // 调用abc的map指�
 
 	Abc_Stop();
 	return 0;
+}
+
+int abc_lutpack(char* in_file, char* out_file, char* lib) {  // 调用abc的map指令
+    void * pAbc;
+    char Command[1000];
+
+    Abc_Start();
+    pAbc = Abc_FrameGetGlobalFrame();
+
+    sprintf(Command, "read_lut abclib/%s", lib);
+    if (Cmd_CommandExecute(pAbc, Command)) {
+        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
+        return 1;
+    }
+
+    sprintf(Command, "read %s", in_file);
+    if (Cmd_CommandExecute(pAbc, Command)) {
+        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
+        return 1;
+    }
+
+    sprintf(Command, "lutpack");  // an area-oriented resynthesis engine for network mapped into K-LUTs
+    if (Cmd_CommandExecute(pAbc, Command)) {
+        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
+        return 1;
+    }
+
+    sprintf(Command, "write_blif %s", out_file);
+    if (Cmd_CommandExecute(pAbc, Command)) {
+        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
+        return 1;
+    }
+
+    Abc_Stop();
+    return 0;
 }
