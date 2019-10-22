@@ -45,7 +45,7 @@ struct Var {
 
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
-    set<set<string> > cuts;  //cuts
+    set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
 
     int out_degree;         // = suc.size()
