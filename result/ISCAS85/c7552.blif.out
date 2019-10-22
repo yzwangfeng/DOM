@@ -1,0 +1,2236 @@
+input:
+IN-G339 
+output:
+G339
+input:
+G1 
+output:
+G2
+input:
+G1 
+output:
+G3
+input:
+G1459 
+output:
+G450
+input:
+G1469 
+output:
+G448
+input:
+G1480 
+output:
+G444
+input:
+G1486 
+output:
+G442
+input:
+G1492 
+output:
+G440
+input:
+G1496 
+output:
+G438
+input:
+G2208 
+output:
+G496
+input:
+G2218 
+output:
+G494
+input:
+G2224 
+output:
+G492
+input:
+G2230 
+output:
+G490
+input:
+G2236 
+output:
+G488
+input:
+G2239 
+output:
+G486
+input:
+G2247 
+output:
+G484
+input:
+G2253 
+output:
+G482
+input:
+G2256 
+output:
+G480
+input:
+G3698 
+output:
+G560
+input:
+G3701 
+output:
+G542
+input:
+G3705 
+output:
+G558
+input:
+G3711 
+output:
+G556
+input:
+G3717 
+output:
+G554
+input:
+G3723 
+output:
+G552
+input:
+G3729 
+output:
+G550
+input:
+G3737 
+output:
+G548
+input:
+G3743 
+output:
+G546
+input:
+G3749 
+output:
+G544
+input:
+G4393 
+output:
+G540
+input:
+G4400 
+output:
+G538
+input:
+G4405 
+output:
+G536
+input:
+G4410 
+output:
+G534
+input:
+G4415 
+output:
+G532
+input:
+G4420 
+output:
+G530
+input:
+G4427 
+output:
+G528
+input:
+G4432 
+output:
+G526
+input:
+G4437 
+output:
+G524
+input:
+G15 
+output:
+G279
+input:
+G1462 
+output:
+G436
+input:
+G2211 
+output:
+G478
+input:
+G4394 
+output:
+G522
+input:
+G5 G57 
+output:
+G402
+input:
+G150 G184 G228 G240 
+output:
+G404
+input:
+G152 G210 G218 G230 
+output:
+G406
+input:
+G182 G183 G185 G186 
+output:
+G408
+input:
+G162 G172 G188 G199 
+output:
+G410
+input:
+G1 
+output:
+G432
+input:
+G106 
+output:
+G446
+input:
+G1197 G5 
+output:
+G284
+input:
+G15 
+output:
+G286
+input:
+G1197 G5 
+output:
+G289
+input:
+G133 G134 G5 
+output:
+G292
+input:
+G15 
+output:
+G341
+input:
+G133 G134 G5 
+output:
+G281
+input:
+G1 
+output:
+G453
+input:
+G1 G163 
+output:
+G278
+input:
+G18 G3701 G41 G4526 
+output:
+G373
+input:
+new_n392_ new_n400_ new_n825_ new_n829_ new_n840_ new_n846_ 
+output:
+G246
+input:
+new_n1222_ new_n1233_ new_n1294_ new_n1307_ new_n1314_ new_n851_ 
+output:
+G258
+input:
+new_n1222_ new_n1233_ new_n1294_ new_n1307_ new_n1314_ new_n851_ 
+output:
+G264
+input:
+new_n392_ new_n400_ new_n825_ new_n829_ new_n840_ new_n846_ 
+output:
+G270
+input:
+G18 G23 G236 G3717 new_n1323_ new_n603_ 
+output:
+G388
+input:
+G3711 new_n382_ new_n614_ new_n620_ new_n639_ new_n652_ 
+output:
+G391
+input:
+G3705 new_n382_ new_n625_ new_n633_ new_n652_ 
+output:
+G394
+input:
+G18 G238 G29 G3705 new_n1337_ 
+output:
+G397
+input:
+G3743 new_n1344_ new_n1349_ new_n564_ new_n584_ new_n665_ 
+output:
+G376
+input:
+G3729 G3737 new_n1348_ new_n549_ new_n572_ new_n588_ 
+output:
+G379
+input:
+new_n553_ new_n573_ new_n578_ new_n602_ new_n646_ new_n659_ 
+output:
+G382
+input:
+G3723 G4526 new_n577_ new_n598_ new_n642_ new_n657_ 
+output:
+G385
+input:
+new_n1383_ new_n1410_ new_n1446_ new_n1488_ new_n1519_ new_n1526_ 
+output:
+G412
+input:
+new_n1562_ new_n1570_ new_n1657_ new_n1697_ 
+output:
+G414
+input:
+new_n1045_ new_n1720_ new_n1739_ new_n1787_ new_n1826_ new_n1856_ 
+output:
+G416
+input:
+new_n1222_ new_n1233_ new_n1294_ new_n1307_ new_n1314_ new_n851_ 
+output:
+G249
+input:
+new_n543_ new_n649_ new_n671_ new_n684_ new_n692_ new_n726_ 
+output:
+G295
+input:
+new_n415_ new_n697_ new_n757_ new_n768_ new_n806_ new_n816_ 
+output:
+G324
+input:
+new_n1062_ new_n1067_ new_n1097_ new_n859_ new_n958_ new_n961_ 
+output:
+G252
+input:
+new_n392_ new_n400_ new_n825_ new_n829_ new_n840_ new_n846_ 
+output:
+G276
+input:
+new_n697_ new_n704_ new_n755_ new_n766_ 
+output:
+G310
+input:
+G2218 G2224 new_n1879_ new_n710_ new_n735_ new_n750_ 
+output:
+G313
+input:
+G2211 G2218 new_n697_ new_n710_ new_n721_ new_n739_ 
+output:
+G316
+input:
+G2211 G2218 new_n697_ new_n710_ new_n721_ 
+output:
+G319
+input:
+G1480 G1486 new_n391_ new_n394_ new_n818_ new_n824_ 
+output:
+G327
+input:
+new_n427_ new_n769_ new_n806_ new_n816_ new_n824_ new_n828_ 
+output:
+G330
+input:
+G1462 G1469 new_n402_ new_n410_ new_n425_ new_n817_ 
+output:
+G333
+input:
+G1462 new_n407_ new_n410_ new_n769_ new_n806_ new_n816_ 
+output:
+G336
+input:
+new_n1534_ new_n1562_ new_n1570_ new_n1699_ new_n1861_ new_n1922_ 
+output:
+G418
+input:
+new_n392_ new_n400_ new_n825_ new_n829_ new_n840_ new_n846_ 
+output:
+G273
+input:
+new_n1929_ new_n697_ new_n757_ new_n768_ new_n776_ new_n814_ 
+output:
+G298
+input:
+new_n1937_ new_n697_ new_n756_ new_n768_ new_n800_ new_n811_ 
+output:
+G301
+input:
+G2239 new_n697_ new_n757_ new_n768_ new_n784_ new_n788_ 
+output:
+G304
+input:
+G2236 new_n1948_ new_n697_ new_n699_ new_n754_ new_n766_ 
+output:
+G307
+input:
+G118 G18 G217 G4394 new_n1956_ new_n670_ 
+output:
+G344
+input:
+new_n1968_ new_n1973_ new_n392_ new_n400_ new_n825_ new_n829_ 
+output:
+G422
+input:
+new_n1968_ new_n1973_ new_n392_ new_n400_ new_n825_ new_n829_ 
+output:
+G469
+input:
+new_n1977_ new_n392_ new_n400_ new_n818_ new_n824_ new_n829_ 
+output:
+G419
+input:
+new_n1977_ new_n392_ new_n400_ new_n818_ new_n824_ new_n829_ 
+output:
+G471
+input:
+G4410 G4415 new_n1983_ new_n520_ new_n531_ new_n676_ 
+output:
+G359
+input:
+new_n1956_ new_n501_ new_n512_ new_n525_ new_n670_ new_n676_ 
+output:
+G362
+input:
+new_n1956_ new_n488_ new_n499_ new_n512_ new_n670_ new_n674_ 
+output:
+G365
+input:
+G4394 new_n1956_ new_n488_ new_n507_ new_n670_ 
+output:
+G368
+input:
+new_n2010_ new_n438_ new_n460_ new_n469_ new_n474_ new_n688_ 
+output:
+G347
+input:
+G4427 G4432 new_n2010_ new_n456_ new_n468_ new_n685_ 
+output:
+G350
+input:
+new_n1957_ new_n445_ new_n449_ new_n460_ new_n540_ new_n682_ 
+output:
+G353
+input:
+new_n1956_ new_n449_ new_n514_ new_n538_ new_n670_ new_n682_ 
+output:
+G356
+input:
+new_n1875_ new_n2061_ new_n2098_ new_n715_ new_n750_ 
+output:
+G321
+input:
+new_n1967_ new_n1972_ new_n2172_ new_n392_ new_n399_ new_n830_ 
+output:
+G338
+input:
+new_n2008_ new_n2188_ new_n2198_ new_n2260_ new_n2264_ new_n473_ 
+output:
+G370
+input:
+G3717 G3723 new_n2314_ new_n2357_ new_n598_ new_n609_ 
+output:
+G399
+input:
+G12 G1486 G18 G213 G9 
+output:
+new_n392_
+input:
+G12 G1480 G18 G214 G9 new_n398_ 
+output:
+new_n400_
+input:
+new_n428_ new_n758_ new_n768_ new_n807_ new_n816_ new_n824_ 
+output:
+new_n825_
+input:
+G12 G1480 G18 G214 G9 
+output:
+new_n829_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n840_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n846_
+input:
+new_n1069_ new_n1074_ new_n1095_ new_n1220_ new_n959_ new_n961_ 
+output:
+new_n1222_
+input:
+new_n1180_ new_n1186_ new_n1191_ new_n1204_ new_n1207_ new_n1229_ 
+output:
+new_n1233_
+input:
+new_n1258_ new_n1268_ new_n1292_ 
+output:
+new_n1294_
+input:
+new_n1258_ new_n1261_ new_n1263_ new_n1286_ new_n1288_ new_n1302_ 
+output:
+new_n1307_
+input:
+G1455 G2204 G38 G4528 
+output:
+new_n1314_
+input:
+G1455 G2204 G38 G4528 
+output:
+new_n851_
+input:
+G3711 new_n1318_ new_n620_ new_n639_ new_n652_ 
+output:
+new_n1323_
+input:
+G103 G18 G235 G3723 
+output:
+new_n603_
+input:
+G18 G3701 G41 G4526 
+output:
+new_n382_
+input:
+G18 G23 G236 G3717 
+output:
+new_n614_
+input:
+G18 G237 G26 
+output:
+new_n620_
+input:
+G18 G238 G29 G3705 
+output:
+new_n639_
+input:
+G18 G238 G29 G3701 G3705 G41 
+output:
+new_n652_
+input:
+G18 G237 G26 G3711 
+output:
+new_n625_
+input:
+G18 G238 G29 
+output:
+new_n633_
+input:
+G18 G3701 G41 G4526 
+output:
+new_n1337_
+input:
+G127 G18 G233 G3729 G3737 new_n575_ 
+output:
+new_n1344_
+input:
+G3723 G4526 new_n598_ new_n643_ new_n657_ 
+output:
+new_n1349_
+input:
+G100 G18 G231 G3749 
+output:
+new_n564_
+input:
+G124 G18 G232 
+output:
+new_n584_
+input:
+G130 G18 G234 G3729 G3737 new_n549_ 
+output:
+new_n665_
+input:
+G3723 G4526 new_n598_ new_n642_ new_n657_ 
+output:
+new_n1348_
+input:
+G127 G18 G233 
+output:
+new_n549_
+input:
+G130 G18 G234 
+output:
+new_n572_
+input:
+G124 G18 G232 G3743 
+output:
+new_n588_
+input:
+G127 G18 G233 G3737 
+output:
+new_n553_
+input:
+G130 G18 G234 G3729 
+output:
+new_n573_
+input:
+G130 G18 G234 G3729 
+output:
+new_n578_
+input:
+G103 G18 G235 G3723 
+output:
+new_n602_
+input:
+G3717 G4526 new_n603_ new_n609_ new_n626_ new_n641_ 
+output:
+new_n646_
+input:
+G3711 G3717 new_n599_ new_n609_ new_n620_ new_n652_ 
+output:
+new_n659_
+input:
+G130 G18 G234 G3729 
+output:
+new_n577_
+input:
+G103 G18 G235 
+output:
+new_n598_
+input:
+G18 G237 G26 G3711 new_n615_ new_n641_ 
+output:
+new_n642_
+input:
+G3711 G3717 new_n609_ new_n620_ new_n652_ 
+output:
+new_n657_
+input:
+G127 G18 G233 G239 G44 new_n598_ 
+output:
+new_n1383_
+input:
+new_n1390_ new_n1397_ new_n559_ new_n572_ new_n584_ 
+output:
+new_n1410_
+input:
+G18 G213 G214 new_n1424_ new_n1435_ new_n388_ 
+output:
+new_n1446_
+input:
+new_n1449_ new_n1453_ new_n1457_ new_n1465_ new_n1475_ 
+output:
+new_n1488_
+input:
+new_n1495_ new_n1498_ new_n483_ new_n494_ new_n507_ new_n531_ 
+output:
+new_n1519_
+input:
+G18 G220 G221 G32 G50 new_n520_ 
+output:
+new_n1526_
+input:
+G18 G4437 G62 new_n1550_ new_n862_ new_n908_ 
+output:
+new_n1562_
+input:
+G18 G4393 G4400 G58 G78 
+output:
+new_n1570_
+input:
+new_n1574_ new_n1586_ new_n1606_ new_n1623_ new_n1626_ new_n1646_ 
+output:
+new_n1657_
+input:
+G18 G2211 G65 new_n1113_ new_n1672_ new_n1685_ 
+output:
+new_n1697_
+input:
+G100 G18 G200 
+output:
+new_n1045_
+input:
+G103 G18 G204 G205 G23 new_n1712_ 
+output:
+new_n1720_
+input:
+G127 G18 G202 new_n1727_ new_n976_ new_n990_ 
+output:
+new_n1739_
+input:
+new_n1751_ new_n1759_ new_n1767_ new_n1778_ new_n886_ new_n946_ 
+output:
+new_n1787_
+input:
+new_n1127_ new_n1790_ new_n1802_ new_n1814_ new_n1818_ 
+output:
+new_n1826_
+input:
+G168 G169 G170 new_n1429_ new_n1829_ new_n1846_ 
+output:
+new_n1856_
+input:
+new_n439_ new_n476_ new_n502_ new_n512_ new_n538_ 
+output:
+new_n543_
+input:
+G4526 new_n566_ new_n590_ new_n603_ new_n627_ new_n640_ 
+output:
+new_n649_
+input:
+G3723 new_n563_ new_n592_ new_n598_ new_n657_ new_n669_ 
+output:
+new_n671_
+input:
+G4415 new_n439_ new_n475_ new_n521_ new_n531_ new_n678_ 
+output:
+new_n684_
+input:
+G4432 G4437 new_n433_ new_n468_ new_n688_ 
+output:
+new_n692_
+input:
+G147 G151 G18 G2211 
+output:
+new_n726_
+input:
+G12 G1462 G18 G209 G9 
+output:
+new_n415_
+input:
+new_n478_ new_n541_ new_n648_ new_n671_ new_n683_ new_n692_ 
+output:
+new_n697_
+input:
+G2224 new_n705_ new_n716_ new_n727_ new_n735_ new_n750_ 
+output:
+new_n757_
+input:
+G2230 G2236 new_n699_ new_n745_ new_n764_ 
+output:
+new_n768_
+input:
+G2239 new_n776_ new_n784_ new_n788_ new_n800_ 
+output:
+new_n806_
+input:
+G2253 G2256 new_n771_ new_n795_ new_n811_ 
+output:
+new_n816_
+input:
+new_n1003_ new_n1012_ new_n1025_ new_n1037_ new_n1061_ new_n969_ 
+output:
+new_n1062_
+input:
+G100 G18 G200 G3749 G56 new_n1064_ 
+output:
+new_n1067_
+input:
+new_n1071_ new_n1080_ new_n1084_ new_n1092_ new_n878_ new_n917_ 
+output:
+new_n1097_
+input:
+G18 G189 G4437 G62 G66 
+output:
+new_n859_
+input:
+new_n867_ new_n878_ new_n891_ new_n905_ new_n917_ new_n953_ 
+output:
+new_n958_
+input:
+G18 G189 G4437 G62 G66 
+output:
+new_n961_
+input:
+G12 G157 G18 G2236 G9 
+output:
+new_n704_
+input:
+G2218 new_n710_ new_n727_ new_n739_ new_n751_ 
+output:
+new_n755_
+input:
+G135 G158 G18 G2230 new_n738_ new_n762_ 
+output:
+new_n766_
+input:
+new_n543_ new_n649_ new_n671_ new_n694_ new_n722_ new_n726_ 
+output:
+new_n1879_
+input:
+G138 G160 G18 
+output:
+new_n710_
+input:
+G144 G159 G18 
+output:
+new_n735_
+input:
+G135 G158 G18 G2230 
+output:
+new_n750_
+input:
+G147 G151 G18 
+output:
+new_n721_
+input:
+G144 G159 G18 G2224 
+output:
+new_n739_
+input:
+G12 G18 G213 G9 
+output:
+new_n391_
+input:
+G12 G18 G214 G9 
+output:
+new_n394_
+input:
+new_n427_ new_n697_ new_n756_ new_n768_ new_n806_ new_n816_ 
+output:
+new_n818_
+input:
+G106 G1469 new_n402_ new_n420_ new_n819_ 
+output:
+new_n824_
+input:
+G106 G12 G9 new_n407_ new_n416_ new_n419_ 
+output:
+new_n427_
+input:
+new_n543_ new_n649_ new_n671_ new_n694_ new_n757_ new_n768_ 
+output:
+new_n769_
+input:
+G12 G1480 G18 G214 G9 
+output:
+new_n828_
+input:
+G12 G18 G216 G9 
+output:
+new_n402_
+input:
+G12 G18 G209 G9 
+output:
+new_n410_
+input:
+G106 G12 G18 G215 G9 
+output:
+new_n425_
+input:
+new_n697_ new_n705_ new_n754_ new_n768_ new_n807_ new_n816_ 
+output:
+new_n817_
+input:
+G12 G1469 G18 G216 G9 
+output:
+new_n407_
+input:
+new_n1383_ new_n1410_ new_n1446_ new_n1487_ new_n1519_ new_n1526_ 
+output:
+new_n1534_
+input:
+new_n1123_ new_n1615_ new_n1623_ new_n1626_ new_n1646_ new_n1693_ 
+output:
+new_n1699_
+input:
+new_n1045_ new_n1720_ new_n1739_ new_n1787_ new_n1826_ new_n1856_ 
+output:
+new_n1861_
+input:
+G230 G404 G408 G410 new_n336_ 
+output:
+new_n1922_
+input:
+G2239 G2247 G2253 new_n779_ new_n788_ new_n795_ 
+output:
+new_n1929_
+input:
+G12 G153 G18 G2256 G9 
+output:
+new_n776_
+input:
+G2239 G2247 G2253 new_n779_ new_n788_ new_n795_ 
+output:
+new_n814_
+input:
+G155 G156 G18 G2239 G2247 new_n388_ 
+output:
+new_n1937_
+input:
+new_n704_ new_n716_ new_n727_ new_n739_ new_n751_ 
+output:
+new_n756_
+input:
+G12 G154 G18 G2253 G9 
+output:
+new_n800_
+input:
+G155 G156 G18 G2239 G2247 new_n388_ 
+output:
+new_n811_
+input:
+G12 G155 G18 G2247 G9 
+output:
+new_n784_
+input:
+G12 G156 G18 G9 
+output:
+new_n788_
+input:
+G12 G156 G18 G2239 G9 
+output:
+new_n1948_
+input:
+G12 G157 G18 G9 
+output:
+new_n699_
+input:
+G2218 new_n710_ new_n726_ new_n740_ new_n751_ 
+output:
+new_n754_
+input:
+G3723 G4526 new_n592_ new_n598_ new_n642_ new_n657_ 
+output:
+new_n1956_
+input:
+G100 G18 G231 G3749 new_n587_ new_n666_ 
+output:
+new_n670_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n1968_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n1973_
+input:
+G1492 G38 G4528 
+output:
+new_n1977_
+input:
+new_n1348_ new_n501_ new_n513_ new_n567_ new_n590_ new_n670_ 
+output:
+new_n1983_
+input:
+G121 G18 G224 
+output:
+new_n520_
+input:
+G18 G223 G47 
+output:
+new_n531_
+input:
+G4394 G4400 G4405 new_n483_ new_n494_ new_n507_ 
+output:
+new_n676_
+input:
+G18 G226 G4400 G4405 G97 new_n494_ 
+output:
+new_n501_
+input:
+G118 G18 G217 G4394 
+output:
+new_n512_
+input:
+G121 G18 G224 G4410 
+output:
+new_n525_
+input:
+G18 G226 G4400 G97 
+output:
+new_n488_
+input:
+G18 G225 G4405 G94 
+output:
+new_n499_
+input:
+G118 G18 G217 G4394 G4400 new_n483_ 
+output:
+new_n674_
+input:
+G118 G18 G217 
+output:
+new_n507_
+input:
+new_n1956_ new_n450_ new_n515_ new_n539_ new_n670_ new_n682_ 
+output:
+new_n2010_
+input:
+G18 G219 G4437 G66 
+output:
+new_n438_
+input:
+G18 G221 G32 G4427 
+output:
+new_n460_
+input:
+G18 G220 G4432 G50 
+output:
+new_n469_
+input:
+G18 G220 G4432 G50 
+output:
+new_n474_
+input:
+G18 G221 G32 G4427 new_n685_ 
+output:
+new_n688_
+input:
+G18 G221 G32 
+output:
+new_n456_
+input:
+G18 G220 G50 
+output:
+new_n468_
+input:
+G18 G222 G35 G4420 
+output:
+new_n685_
+input:
+new_n563_ new_n593_ new_n602_ new_n646_ new_n659_ new_n669_ 
+output:
+new_n1957_
+input:
+G18 G222 G35 G4420 
+output:
+new_n445_
+input:
+G18 G222 G35 G4420 
+output:
+new_n449_
+input:
+G4410 new_n488_ new_n500_ new_n513_ new_n520_ new_n536_ 
+output:
+new_n540_
+input:
+G4410 G4415 new_n520_ new_n531_ new_n677_ 
+output:
+new_n682_
+input:
+G18 G226 G4400 G97 new_n500_ new_n512_ 
+output:
+new_n514_
+input:
+G18 G223 G4410 G4415 G47 new_n520_ 
+output:
+new_n538_
+input:
+G135 G158 G18 G2230 new_n704_ new_n764_ 
+output:
+new_n1875_
+input:
+new_n2043_ new_n2045_ new_n2054_ new_n697_ new_n757_ new_n768_ 
+output:
+new_n2061_
+input:
+new_n2078_ new_n2082_ new_n697_ new_n722_ new_n725_ new_n800_ 
+output:
+new_n2098_
+input:
+G138 G160 G18 G2218 
+output:
+new_n715_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n1967_
+input:
+G1492 G1496 G38 G4528 
+output:
+new_n1972_
+input:
+new_n2146_ new_n2170_ new_n758_ new_n768_ new_n806_ new_n816_ 
+output:
+new_n2172_
+input:
+G12 G1480 G18 G214 G9 new_n398_ 
+output:
+new_n399_
+input:
+new_n428_ new_n769_ new_n807_ new_n816_ new_n824_ new_n829_ 
+output:
+new_n830_
+input:
+new_n1348_ new_n541_ new_n567_ new_n590_ new_n670_ new_n682_ 
+output:
+new_n2008_
+input:
+G4420 G4427 G4432 new_n444_ new_n456_ new_n468_ 
+output:
+new_n2188_
+input:
+G4420 G4427 G4432 new_n444_ new_n456_ new_n468_ 
+output:
+new_n2198_
+input:
+new_n1956_ new_n2211_ new_n2224_ new_n2234_ new_n2252_ new_n670_ 
+output:
+new_n2260_
+input:
+G18 G219 G4427 G4437 G66 new_n456_ 
+output:
+new_n2264_
+input:
+G18 G220 G4432 G50 
+output:
+new_n473_
+input:
+G4526 new_n2278_ new_n2284_ new_n2304_ new_n380_ new_n638_ 
+output:
+new_n2314_
+input:
+new_n1348_ new_n2320_ new_n2330_ new_n2340_ new_n2347_ new_n625_ 
+output:
+new_n2357_
+input:
+G18 G23 G236 
+output:
+new_n609_
+input:
+G12 G1486 G18 G213 G9 
+output:
+new_n398_
+input:
+G12 G1462 G9 new_n407_ new_n409_ new_n425_ 
+output:
+new_n428_
+input:
+new_n542_ new_n649_ new_n671_ new_n684_ new_n692_ new_n757_ 
+output:
+new_n758_
+input:
+G2239 new_n776_ new_n784_ new_n788_ new_n800_ 
+output:
+new_n807_
+input:
+new_n1026_ new_n1037_ new_n1047_ new_n1058_ new_n1068_ 
+output:
+new_n1069_
+input:
+new_n1071_ new_n879_ new_n913_ new_n915_ 
+output:
+new_n1074_
+input:
+new_n1077_ new_n1084_ new_n1088_ new_n1090_ new_n904_ new_n931_ 
+output:
+new_n1095_
+input:
+new_n1154_ new_n1160_ new_n1171_ new_n1201_ new_n1215_ 
+output:
+new_n1220_
+input:
+new_n859_ new_n867_ new_n879_ new_n956_ 
+output:
+new_n959_
+input:
+G109 G12 G174 G18 G2253 G9 
+output:
+new_n1180_
+input:
+G110 G12 G173 G18 G2256 G9 
+output:
+new_n1186_
+input:
+G110 G12 G173 G18 G2256 G9 
+output:
+new_n1191_
+input:
+G12 G175 G18 G2247 G86 G9 
+output:
+new_n1204_
+input:
+G109 G12 G174 G18 G2253 G9 
+output:
+new_n1207_
+input:
+new_n1149_ new_n1163_ new_n1166_ new_n1197_ new_n1210_ new_n1225_ 
+output:
+new_n1229_
+input:
+G106 G18 G87 new_n1242_ new_n1248_ new_n1254_ 
+output:
+new_n1258_
+input:
+G111 G12 G1469 G169 G18 G9 
+output:
+new_n1268_
+input:
+G1486 G166 G18 G88 new_n1282_ new_n388_ 
+output:
+new_n1292_
+input:
+G111 G1469 G18 
+output:
+new_n1261_
+input:
+G12 G169 G18 G9 
+output:
+new_n1263_
+input:
+G12 G1486 G166 G18 G88 G9 
+output:
+new_n1286_
+input:
+G113 G12 G1462 G18 G9 
+output:
+new_n1288_
+input:
+G112 G1480 G18 new_n1240_ new_n1250_ new_n1278_ 
+output:
+new_n1302_
+input:
+G18 G3701 G41 G4526 
+output:
+new_n1318_
+input:
+G130 G18 G234 
+output:
+new_n575_
+input:
+G18 G23 G236 G3717 new_n625_ new_n640_ 
+output:
+new_n643_
+input:
+G18 G237 G26 G3711 
+output:
+new_n626_
+input:
+G18 G238 G29 G3701 G3705 G41 
+output:
+new_n641_
+input:
+G103 G18 G235 G3723 
+output:
+new_n599_
+input:
+G18 G23 G236 G3717 
+output:
+new_n615_
+input:
+G18 G229 G237 G26 G41 
+output:
+new_n1390_
+input:
+G18 G23 G236 G238 G29 
+output:
+new_n1397_
+input:
+G100 G18 G231 
+output:
+new_n559_
+input:
+G18 G209 G215 G216 
+output:
+new_n1424_
+input:
+G211 G212 
+output:
+new_n1435_
+input:
+G12 G9 
+output:
+new_n388_
+input:
+G12 G153 G154 G18 G9 
+output:
+new_n1449_
+input:
+G12 G155 G156 G18 G9 
+output:
+new_n1453_
+input:
+G12 G147 G151 G157 G18 G9 
+output:
+new_n1457_
+input:
+G135 G138 G158 G160 G18 
+output:
+new_n1465_
+input:
+G141 G144 G159 G161 G18 
+output:
+new_n1475_
+input:
+G115 G18 G227 
+output:
+new_n1495_
+input:
+G18 G219 G222 G35 G66 
+output:
+new_n1498_
+input:
+G18 G226 G97 
+output:
+new_n483_
+input:
+G18 G225 G94 
+output:
+new_n494_
+input:
+G18 G4427 G60 new_n1538_ new_n882_ new_n896_ 
+output:
+new_n1550_
+input:
+G18 G4432 G61 
+output:
+new_n862_
+input:
+G18 G4410 G81 
+output:
+new_n908_
+input:
+G18 G3723 G3729 G53 G73 
+output:
+new_n1574_
+input:
+G18 G3717 G3743 G55 G75 new_n1582_ 
+output:
+new_n1586_
+input:
+G18 G3698 G3701 G69 G70 new_n1593_ 
+output:
+new_n1606_
+input:
+G113 G114 G1459 G1462 G18 
+output:
+new_n1623_
+input:
+G112 G1480 G1486 G18 G88 
+output:
+new_n1626_
+input:
+G1455 G1492 G1496 G18 G2204 new_n1638_ 
+output:
+new_n1646_
+input:
+G18 G2224 G84 
+output:
+new_n1113_
+input:
+G18 G2218 G83 new_n1660_ new_n1663_ 
+output:
+new_n1672_
+input:
+G109 G18 G2208 G2253 G82 new_n1135_ 
+output:
+new_n1685_
+input:
+G130 G18 G198 G203 G41 
+output:
+new_n1712_
+input:
+G124 G18 G201 G208 G44 
+output:
+new_n1727_
+input:
+G18 G206 G26 
+output:
+new_n976_
+input:
+G18 G207 G29 
+output:
+new_n990_
+input:
+G18 G195 G196 G94 G97 
+output:
+new_n1751_
+input:
+G115 G18 G189 G197 G66 
+output:
+new_n1759_
+input:
+G18 G190 G191 G32 G50 
+output:
+new_n1767_
+input:
+G121 G18 G193 G194 G47 
+output:
+new_n1778_
+input:
+G18 G192 G35 
+output:
+new_n886_
+input:
+G118 G18 G187 
+output:
+new_n946_
+input:
+G147 G171 G18 
+output:
+new_n1127_
+input:
+G12 G173 G174 G18 G9 
+output:
+new_n1790_
+input:
+G12 G175 G176 G177 G18 G9 
+output:
+new_n1802_
+input:
+G141 G144 G179 G18 G181 
+output:
+new_n1814_
+input:
+G135 G138 G178 G18 G180 
+output:
+new_n1818_
+input:
+G12 G18 G9 
+output:
+new_n1429_
+input:
+G12 G166 G167 G18 G9 
+output:
+new_n1829_
+input:
+G164 G165 
+output:
+new_n1846_
+input:
+G18 G219 G4437 G66 
+output:
+new_n439_
+input:
+G18 G220 G4432 G50 new_n449_ new_n460_ 
+output:
+new_n476_
+input:
+G18 G225 G4405 G94 new_n488_ 
+output:
+new_n502_
+input:
+G127 G18 G233 G3737 G3749 new_n559_ 
+output:
+new_n566_
+input:
+G130 G18 G234 G3729 G3743 new_n584_ 
+output:
+new_n590_
+input:
+G18 G237 G26 G3711 new_n615_ 
+output:
+new_n627_
+input:
+G18 G238 G29 G3701 G3705 G41 
+output:
+new_n640_
+input:
+G100 G18 G231 G3749 
+output:
+new_n563_
+input:
+G3743 G3749 new_n553_ new_n559_ new_n577_ new_n584_ 
+output:
+new_n592_
+input:
+G3737 G3743 new_n549_ new_n560_ new_n573_ new_n584_ 
+output:
+new_n669_
+input:
+G18 G220 G4432 G50 new_n450_ new_n461_ 
+output:
+new_n475_
+input:
+G121 G18 G224 G4410 
+output:
+new_n521_
+input:
+G4400 G4405 new_n483_ new_n494_ new_n508_ new_n524_ 
+output:
+new_n678_
+input:
+G18 G219 G66 
+output:
+new_n433_
+input:
+G4437 new_n433_ new_n450_ new_n460_ new_n473_ 
+output:
+new_n478_
+input:
+G4405 new_n488_ new_n494_ new_n512_ new_n525_ new_n537_ 
+output:
+new_n541_
+input:
+G4526 new_n566_ new_n591_ new_n604_ new_n627_ new_n640_ 
+output:
+new_n648_
+input:
+G4410 G4415 new_n520_ new_n531_ new_n676_ 
+output:
+new_n683_
+input:
+G12 G157 G18 G2236 G9 
+output:
+new_n705_
+input:
+G138 G160 G18 G2218 
+output:
+new_n716_
+input:
+G147 G151 G18 G2211 
+output:
+new_n727_
+input:
+G135 G158 G18 
+output:
+new_n745_
+input:
+G2218 G2224 new_n710_ new_n722_ new_n735_ 
+output:
+new_n764_
+input:
+G12 G153 G18 G9 
+output:
+new_n771_
+input:
+G12 G154 G18 G9 
+output:
+new_n795_
+input:
+new_n1001_ new_n977_ new_n979_ new_n987_ new_n990_ new_n994_ 
+output:
+new_n1003_
+input:
+G103 G18 G204 G3723 G73 
+output:
+new_n1012_
+input:
+G103 G18 G204 G3723 G73 new_n1021_ 
+output:
+new_n1025_
+input:
+G127 G18 G202 G3737 G54 new_n1028_ 
+output:
+new_n1037_
+input:
+G100 G18 G200 new_n1042_ new_n1055_ new_n1057_ 
+output:
+new_n1061_
+input:
+G18 G205 G23 G3717 G75 
+output:
+new_n969_
+input:
+G124 G18 G201 G3743 G55 
+output:
+new_n1064_
+input:
+G100 G18 G200 G3749 G56 new_n1064_ 
+output:
+new_n1071_
+input:
+new_n867_ new_n882_ new_n886_ new_n901_ new_n931_ new_n961_ 
+output:
+new_n1080_
+input:
+new_n919_ new_n927_ new_n939_ new_n947_ 
+output:
+new_n1084_
+input:
+new_n1086_ new_n859_ new_n889_ new_n950_ 
+output:
+new_n1092_
+input:
+G18 G191 G32 G4427 G60 new_n869_ 
+output:
+new_n878_
+input:
+G121 G18 G194 G4410 G81 new_n915_ 
+output:
+new_n917_
+input:
+G18 G190 G4432 G50 G61 
+output:
+new_n867_
+input:
+G18 G191 G32 G4427 G60 new_n887_ 
+output:
+new_n891_
+input:
+G18 G192 G35 G4420 G79 new_n901_ 
+output:
+new_n905_
+input:
+new_n919_ new_n922_ new_n925_ new_n934_ new_n938_ new_n947_ 
+output:
+new_n953_
+input:
+G135 G158 G18 G2230 
+output:
+new_n751_
+input:
+G144 G159 G18 G2224 
+output:
+new_n738_
+input:
+G138 G160 G18 G2218 new_n737_ new_n759_ 
+output:
+new_n762_
+input:
+new_n437_ new_n478_ new_n535_ new_n678_ new_n680_ new_n691_ 
+output:
+new_n694_
+input:
+G147 G151 G18 G2211 
+output:
+new_n722_
+input:
+G12 G18 G215 G9 
+output:
+new_n420_
+input:
+G12 G1462 G18 G209 G9 
+output:
+new_n819_
+input:
+G12 G1462 G18 G209 G9 
+output:
+new_n416_
+input:
+G18 G215 
+output:
+new_n419_
+input:
+new_n1449_ new_n1453_ new_n1457_ new_n1465_ new_n1475_ 
+output:
+new_n1487_
+input:
+G18 G2211 G65 
+output:
+new_n1123_
+input:
+new_n1574_ new_n1578_ new_n1582_ new_n1589_ new_n1593_ new_n1601_ 
+output:
+new_n1615_
+input:
+new_n1105_ new_n1113_ new_n1135_ new_n1660_ new_n1663_ new_n1681_ 
+output:
+new_n1693_
+input:
+G152 G210 G218 
+output:
+new_n336_
+input:
+G12 G155 G18 G9 
+output:
+new_n779_
+input:
+G144 G159 G18 G2224 
+output:
+new_n740_
+input:
+G124 G18 G232 G3743 
+output:
+new_n587_
+input:
+G127 G18 G233 G3737 new_n586_ new_n663_ 
+output:
+new_n666_
+input:
+G118 G18 G217 G4394 
+output:
+new_n513_
+input:
+G100 G18 G231 G3749 new_n553_ 
+output:
+new_n567_
+input:
+G18 G222 G35 G4420 
+output:
+new_n450_
+input:
+G18 G226 G4400 G97 new_n500_ new_n513_ 
+output:
+new_n515_
+input:
+G121 G18 G224 G4410 new_n536_ 
+output:
+new_n539_
+input:
+G3743 new_n553_ new_n564_ new_n577_ new_n584_ 
+output:
+new_n593_
+input:
+G18 G225 G4405 G94 
+output:
+new_n500_
+input:
+G18 G223 G4415 G47 
+output:
+new_n536_
+input:
+G4400 G4405 new_n483_ new_n494_ new_n508_ 
+output:
+new_n677_
+input:
+G2253 G2256 new_n2032_ new_n771_ new_n795_ new_n811_ 
+output:
+new_n2043_
+input:
+G12 G155 G18 G2247 G9 new_n793_ 
+output:
+new_n2045_
+input:
+G12 G153 G18 G2256 G9 new_n2050_ 
+output:
+new_n2054_
+input:
+G2224 new_n2072_ new_n716_ new_n727_ new_n735_ new_n750_ 
+output:
+new_n2078_
+input:
+G2218 G2224 new_n710_ new_n735_ new_n759_ 
+output:
+new_n2082_
+input:
+G147 G151 G18 G2211 
+output:
+new_n725_
+input:
+G1480 new_n2109_ new_n2112_ new_n2133_ new_n394_ new_n824_ 
+output:
+new_n2146_
+input:
+G1480 new_n2153_ new_n2161_ new_n394_ new_n427_ new_n824_ 
+output:
+new_n2170_
+input:
+G18 G222 G35 
+output:
+new_n444_
+input:
+G118 G18 G217 G4394 G4400 new_n483_ 
+output:
+new_n2211_
+input:
+G4405 G4410 new_n494_ new_n520_ new_n536_ new_n674_ 
+output:
+new_n2224_
+input:
+G118 G18 G217 G4394 G4415 new_n531_ 
+output:
+new_n2234_
+input:
+new_n2235_ new_n499_ new_n514_ new_n521_ new_n524_ new_n676_ 
+output:
+new_n2252_
+input:
+G18 G3701 G41 new_n2273_ 
+output:
+new_n2278_
+input:
+G18 G237 G26 G3711 new_n2280_ 
+output:
+new_n2284_
+input:
+G3711 G3717 new_n2296_ new_n609_ new_n620_ new_n652_ 
+output:
+new_n2304_
+input:
+G18 G3701 G41 
+output:
+new_n380_
+input:
+G18 G238 G29 G3705 
+output:
+new_n638_
+input:
+G127 G18 G233 G3729 G3737 new_n572_ 
+output:
+new_n2320_
+input:
+G3737 G3743 new_n549_ new_n564_ new_n573_ new_n584_ 
+output:
+new_n2330_
+input:
+G130 G18 G234 G3729 G3737 new_n549_ 
+output:
+new_n2340_
+input:
+G3737 G3743 new_n549_ new_n564_ new_n576_ new_n584_ 
+output:
+new_n2347_
+input:
+G18 G209 
+output:
+new_n409_
+input:
+new_n438_ new_n476_ new_n501_ new_n513_ new_n526_ new_n536_ 
+output:
+new_n542_
+input:
+new_n1001_ new_n1012_ new_n1024_ new_n969_ new_n980_ new_n999_ 
+output:
+new_n1026_
+input:
+G100 G18 G200 G3749 G56 
+output:
+new_n1047_
+input:
+G124 G18 G201 G3743 G55 new_n1057_ 
+output:
+new_n1058_
+input:
+G100 G18 G200 G3749 G56 new_n1064_ 
+output:
+new_n1068_
+input:
+G18 G190 G4432 G50 G61 new_n877_ 
+output:
+new_n879_
+input:
+G121 G18 G194 G4410 G81 
+output:
+new_n913_
+input:
+G18 G193 G4415 G47 G80 
+output:
+new_n915_
+input:
+G18 G189 G4437 G62 G66 new_n867_ 
+output:
+new_n1077_
+input:
+G118 G18 G187 G4394 G77 new_n889_ 
+output:
+new_n1088_
+input:
+G18 G189 G4437 G62 G66 new_n950_ 
+output:
+new_n1090_
+input:
+G18 G192 G35 G4420 G79 new_n901_ 
+output:
+new_n904_
+input:
+G18 G195 G4405 G59 G94 
+output:
+new_n931_
+input:
+new_n1110_ new_n1118_ new_n1128_ new_n1130_ new_n1140_ new_n1148_ 
+output:
+new_n1154_
+input:
+G144 G179 G18 G2224 G84 new_n1158_ 
+output:
+new_n1160_
+input:
+G135 G178 G18 G2230 G85 new_n1168_ 
+output:
+new_n1171_
+input:
+G110 G18 G2256 new_n1180_ new_n1185_ new_n1197_ 
+output:
+new_n1201_
+input:
+new_n1204_ new_n1207_ new_n1210_ new_n1211_ 
+output:
+new_n1215_
+input:
+new_n891_ new_n905_ new_n917_ new_n929_ new_n931_ new_n951_ 
+output:
+new_n956_
+input:
+G135 G178 G18 G2230 G85 new_n1148_ 
+output:
+new_n1149_
+input:
+G18 G2239 G63 
+output:
+new_n1163_
+input:
+G12 G176 G18 G9 
+output:
+new_n1166_
+input:
+G12 G175 G18 G2247 G86 G9 
+output:
+new_n1197_
+input:
+G12 G177 G18 G2236 G64 G9 
+output:
+new_n1210_
+input:
+new_n1105_ new_n1108_ new_n1113_ new_n1116_ new_n1128_ new_n1170_ 
+output:
+new_n1225_
+input:
+G112 G12 G1480 G167 G18 G9 
+output:
+new_n1242_
+input:
+G12 G168 G18 G9 
+output:
+new_n1248_
+input:
+G112 G12 G1480 G167 G18 G9 
+output:
+new_n1254_
+input:
+G113 G1462 G18 
+output:
+new_n1282_
+input:
+G12 G167 G18 G9 
+output:
+new_n1240_
+input:
+G106 G12 G168 G18 G87 G9 
+output:
+new_n1250_
+input:
+G12 G1486 G166 G18 G88 G9 
+output:
+new_n1278_
+input:
+G18 G4394 G4405 G59 G77 
+output:
+new_n1538_
+input:
+G18 G4420 G79 
+output:
+new_n882_
+input:
+G18 G4415 G80 
+output:
+new_n896_
+input:
+G18 G3711 G3749 G56 G76 
+output:
+new_n1582_
+input:
+G18 G3705 G3737 G54 G74 
+output:
+new_n1593_
+input:
+G106 G111 G1469 G18 G87 
+output:
+new_n1638_
+input:
+G18 G2236 G2247 G64 G86 
+output:
+new_n1660_
+input:
+G110 G18 G2239 G2256 G63 
+output:
+new_n1663_
+input:
+G18 G2230 G85 
+output:
+new_n1135_
+input:
+G100 G18 G231 G3749 
+output:
+new_n560_
+input:
+G18 G221 G32 G4427 
+output:
+new_n461_
+input:
+G118 G18 G217 G4394 
+output:
+new_n508_
+input:
+G121 G18 G224 G4410 
+output:
+new_n524_
+input:
+G18 G223 G4415 G47 
+output:
+new_n537_
+input:
+G124 G18 G232 G3743 new_n577_ 
+output:
+new_n591_
+input:
+G103 G18 G235 G3723 
+output:
+new_n604_
+input:
+G18 G206 G26 G3711 G76 
+output:
+new_n1001_
+input:
+G18 G206 G26 G3711 G76 
+output:
+new_n977_
+input:
+G18 G205 G23 G3717 G75 
+output:
+new_n979_
+input:
+G18 G41 G70 G89 
+output:
+new_n987_
+input:
+G18 G3705 G74 
+output:
+new_n994_
+input:
+G130 G18 G203 G3729 G53 
+output:
+new_n1021_
+input:
+G130 G18 G203 G3729 G53 
+output:
+new_n1028_
+input:
+G18 G3749 G56 
+output:
+new_n1042_
+input:
+G124 G18 G201 G3743 G55 
+output:
+new_n1055_
+input:
+G127 G18 G202 G3737 G54 
+output:
+new_n1057_
+input:
+G18 G193 G4415 G47 G80 
+output:
+new_n901_
+input:
+G121 G18 G194 G4410 G81 
+output:
+new_n919_
+input:
+G18 G195 G4405 G59 G94 
+output:
+new_n927_
+input:
+G18 G196 G4400 G78 G97 
+output:
+new_n939_
+input:
+G118 G18 G187 G4394 G77 
+output:
+new_n947_
+input:
+G118 G18 G187 G4394 G77 
+output:
+new_n1086_
+input:
+G18 G191 G32 G4427 G60 
+output:
+new_n889_
+input:
+G18 G196 G4400 G78 G97 
+output:
+new_n950_
+input:
+G18 G190 G4432 G50 G61 
+output:
+new_n869_
+input:
+G18 G192 G35 G4420 G79 
+output:
+new_n887_
+input:
+G18 G4405 G59 
+output:
+new_n922_
+input:
+G18 G195 G94 
+output:
+new_n925_
+input:
+G18 G4400 G78 
+output:
+new_n934_
+input:
+G18 G196 G97 
+output:
+new_n938_
+input:
+G144 G159 G18 G2224 
+output:
+new_n737_
+input:
+G147 G151 G18 G2211 
+output:
+new_n759_
+input:
+G18 G219 G4437 G66 
+output:
+new_n437_
+input:
+G18 G223 G4415 G47 
+output:
+new_n535_
+input:
+G18 G223 G4410 G4415 G47 new_n520_ 
+output:
+new_n680_
+input:
+G4427 G4432 new_n434_ new_n456_ new_n468_ new_n685_ 
+output:
+new_n691_
+input:
+G18 G3717 G3743 G55 G75 
+output:
+new_n1578_
+input:
+G18 G3701 G70 
+output:
+new_n1589_
+input:
+G18 G3698 G69 
+output:
+new_n1601_
+input:
+G18 G2218 G83 
+output:
+new_n1105_
+input:
+G109 G18 G2208 G2253 G82 
+output:
+new_n1681_
+input:
+G124 G18 G232 G3743 
+output:
+new_n586_
+input:
+G130 G18 G234 G3729 
+output:
+new_n663_
+input:
+G155 G156 G18 G2239 G2247 new_n388_ 
+output:
+new_n2032_
+input:
+G12 G156 G18 G2239 G9 
+output:
+new_n793_
+input:
+G2239 G2247 G2253 new_n779_ new_n788_ new_n795_ 
+output:
+new_n2050_
+input:
+G147 G151 G18 G2211 G2218 new_n710_ 
+output:
+new_n2072_
+input:
+G1462 G1469 G18 G209 G216 new_n388_ 
+output:
+new_n2109_
+input:
+G12 G1486 G18 G213 G9 new_n425_ 
+output:
+new_n2112_
+input:
+G106 G1462 G1469 new_n402_ new_n410_ new_n420_ 
+output:
+new_n2133_
+input:
+G1462 new_n1895_ new_n407_ new_n411_ new_n425_ new_n828_ 
+output:
+new_n2153_
+input:
+G106 G1462 G1469 new_n402_ new_n410_ new_n420_ 
+output:
+new_n2161_
+input:
+G118 G18 G217 G4394 G4400 new_n483_ 
+output:
+new_n2235_
+input:
+G3711 G3717 new_n609_ new_n620_ new_n641_ new_n652_ 
+output:
+new_n2273_
+input:
+G18 G238 G29 G3701 G3705 G41 
+output:
+new_n2280_
+input:
+G18 G238 G29 G3701 G3705 G41 
+output:
+new_n2296_
+input:
+G130 G18 G234 G3729 
+output:
+new_n576_
+input:
+G121 G18 G224 G4410 
+output:
+new_n526_
+input:
+G103 G18 G204 G3723 G73 new_n1021_ 
+output:
+new_n1024_
+input:
+G18 G205 G23 G3717 G75 new_n977_ 
+output:
+new_n980_
+input:
+G18 G207 G29 G3705 G74 new_n987_ 
+output:
+new_n999_
+input:
+G18 G191 G32 G4427 G60 
+output:
+new_n877_
+input:
+G138 G18 G180 G2218 G83 
+output:
+new_n1110_
+input:
+G144 G179 G18 G2224 G84 
+output:
+new_n1118_
+input:
+G147 G171 G18 G2211 G65 
+output:
+new_n1128_
+input:
+G138 G18 G180 G2218 G83 
+output:
+new_n1130_
+input:
+G135 G178 G18 G2230 G85 
+output:
+new_n1140_
+input:
+G12 G177 G18 G2236 G64 G9 
+output:
+new_n1148_
+input:
+G147 G171 G18 G2211 G65 
+output:
+new_n1158_
+input:
+G12 G176 G18 G2239 G63 G9 
+output:
+new_n1168_
+input:
+G12 G173 G18 G9 
+output:
+new_n1185_
+input:
+G12 G176 G18 G2239 G63 G9 
+output:
+new_n1211_
+input:
+G121 G18 G194 G4410 G81 new_n927_ 
+output:
+new_n929_
+input:
+G18 G196 G4400 G78 G97 new_n947_ 
+output:
+new_n951_
+input:
+G138 G18 G180 
+output:
+new_n1108_
+input:
+G144 G179 G18 
+output:
+new_n1116_
+input:
+G135 G178 G18 G2230 G85 
+output:
+new_n1170_
+input:
+G18 G219 G4437 G66 
+output:
+new_n434_
+input:
+G12 G1486 G18 G213 G9 
+output:
+new_n1895_
+input:
+G12 G18 G209 G9 
+output:
+new_n411_

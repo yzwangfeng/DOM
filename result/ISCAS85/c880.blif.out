@@ -1,0 +1,460 @@
+input:
+G29gat G42gat G75gat 
+output:
+G388gat
+input:
+G29gat G36gat G80gat 
+output:
+G389gat
+input:
+G29gat G36gat G42gat 
+output:
+G390gat
+input:
+G85gat G86gat 
+output:
+G391gat
+input:
+G13gat G17gat G1gat G8gat 
+output:
+G418gat
+input:
+G13gat G17gat G29gat G36gat G42gat new_n112_ 
+output:
+G419gat
+input:
+G59gat G75gat G80gat 
+output:
+G420gat
+input:
+G36gat G59gat G80gat 
+output:
+G421gat
+input:
+G36gat G42gat G59gat 
+output:
+G422gat
+input:
+G87gat G88gat G90gat 
+output:
+G423gat
+input:
+G13gat G17gat G1gat G26gat G390gat 
+output:
+G446gat
+input:
+G1gat G26gat G51gat 
+output:
+G447gat
+input:
+G13gat G1gat G29gat G55gat G68gat G8gat 
+output:
+G448gat
+input:
+G74gat new_n149_ 
+output:
+G449gat
+input:
+G87gat G88gat G89gat 
+output:
+G450gat
+input:
+G101gat G106gat G130gat G91gat G96gat new_n193_ 
+output:
+G767gat
+input:
+G183gat G189gat G195gat G201gat G207gat new_n217_ 
+output:
+G768gat
+input:
+G219gat G228gat G261gat new_n282_ new_n294_ new_n312_ 
+output:
+G850gat
+input:
+G183gat G219gat new_n252_ new_n344_ new_n350_ new_n372_ 
+output:
+G863gat
+input:
+G189gat G219gat new_n252_ new_n324_ new_n378_ new_n401_ 
+output:
+G864gat
+input:
+G219gat G228gat new_n320_ new_n404_ new_n415_ new_n422_ 
+output:
+G865gat
+input:
+G159gat new_n443_ new_n459_ new_n469_ new_n479_ new_n489_ 
+output:
+G866gat
+input:
+G183gat G219gat new_n344_ new_n351_ new_n497_ new_n514_ 
+output:
+G874gat
+input:
+G219gat G228gat new_n482_ new_n489_ new_n519_ new_n536_ 
+output:
+G878gat
+input:
+G219gat G228gat new_n541_ new_n543_ new_n554_ new_n558_ 
+output:
+G879gat
+input:
+G219gat G228gat new_n565_ new_n566_ new_n577_ new_n581_ 
+output:
+G880gat
+input:
+G1gat G26gat 
+output:
+new_n112_
+input:
+G13gat G1gat G55gat G59gat G68gat G8gat 
+output:
+new_n149_
+input:
+G111gat G116gat G121gat G126gat G135gat 
+output:
+new_n193_
+input:
+G130gat G159gat G165gat G171gat G177gat 
+output:
+new_n217_
+input:
+G126gat G153gat G201gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n282_
+input:
+G126gat G153gat new_n252_ new_n259_ new_n274_ new_n293_ 
+output:
+new_n294_
+input:
+G201gat G42gat G72gat G73gat new_n149_ new_n309_ 
+output:
+new_n312_
+input:
+G268gat G55gat new_n248_ 
+output:
+new_n252_
+input:
+G189gat G195gat new_n252_ new_n320_ new_n324_ new_n332_ 
+output:
+new_n344_
+input:
+G111gat G143gat G17gat G1gat new_n256_ new_n274_ 
+output:
+new_n350_
+input:
+G183gat G228gat G237gat G246gat new_n351_ new_n369_ 
+output:
+new_n372_
+input:
+G116gat G146gat G1gat new_n258_ new_n274_ 
+output:
+new_n324_
+input:
+G195gat G201gat G261gat new_n252_ new_n276_ new_n332_ 
+output:
+new_n378_
+input:
+G189gat G228gat G237gat G246gat new_n326_ new_n396_ 
+output:
+new_n401_
+input:
+G126gat G201gat G261gat new_n252_ new_n260_ new_n274_ 
+output:
+new_n320_
+input:
+G121gat G149gat G195gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n404_
+input:
+G121gat G149gat new_n252_ new_n259_ new_n274_ new_n414_ 
+output:
+new_n415_
+input:
+G195gat G42gat G72gat G73gat new_n149_ new_n420_ 
+output:
+new_n422_
+input:
+G138gat G8gat G91gat new_n274_ new_n441_ 
+output:
+new_n443_
+input:
+G177gat G183gat new_n344_ new_n351_ new_n454_ 
+output:
+new_n459_
+input:
+G101gat G138gat G171gat G17gat new_n274_ new_n465_ 
+output:
+new_n469_
+input:
+G138gat G165gat G51gat G96gat new_n274_ new_n475_ 
+output:
+new_n479_
+input:
+G165gat G171gat G177gat new_n453_ new_n467_ new_n477_ 
+output:
+new_n489_
+input:
+G111gat G143gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n351_
+input:
+G106gat G138gat G152gat G177gat new_n274_ new_n451_ 
+output:
+new_n497_
+input:
+G177gat G228gat new_n449_ new_n451_ new_n506_ new_n510_ 
+output:
+new_n514_
+input:
+G183gat new_n344_ new_n351_ new_n455_ new_n469_ new_n479_ 
+output:
+new_n482_
+input:
+G138gat G159gat G8gat G91gat new_n274_ new_n441_ 
+output:
+new_n519_
+input:
+G91gat new_n274_ new_n432_ new_n442_ new_n528_ new_n534_ 
+output:
+new_n536_
+input:
+G138gat G165gat G51gat G96gat new_n274_ new_n475_ 
+output:
+new_n541_
+input:
+G171gat new_n352_ new_n455_ new_n456_ new_n467_ new_n485_ 
+output:
+new_n543_
+input:
+G138gat G51gat G96gat new_n274_ new_n475_ new_n553_ 
+output:
+new_n554_
+input:
+G165gat G210gat G91gat new_n150_ new_n300_ 
+output:
+new_n558_
+input:
+G101gat G138gat G171gat G17gat new_n274_ new_n465_ 
+output:
+new_n565_
+input:
+G177gat G183gat new_n344_ new_n351_ new_n453_ 
+output:
+new_n566_
+input:
+G101gat G138gat G17gat new_n274_ new_n466_ new_n576_ 
+output:
+new_n577_
+input:
+G171gat G210gat G96gat new_n150_ new_n300_ 
+output:
+new_n581_
+input:
+G156gat G17gat G1gat G26gat G51gat G59gat 
+output:
+new_n259_
+input:
+G17gat G42gat G59gat G75gat new_n265_ new_n271_ 
+output:
+new_n274_
+input:
+G201gat G237gat G246gat 
+output:
+new_n293_
+input:
+G121gat G210gat G255gat G267gat 
+output:
+new_n309_
+input:
+G1gat G26gat G29gat G51gat G75gat G80gat 
+output:
+new_n248_
+input:
+G121gat G149gat G1gat new_n258_ new_n274_ 
+output:
+new_n332_
+input:
+G156gat G1gat G26gat G51gat G59gat 
+output:
+new_n256_
+input:
+G106gat G183gat G210gat new_n150_ new_n300_ 
+output:
+new_n369_
+input:
+G156gat G17gat G1gat G26gat G51gat G59gat 
+output:
+new_n258_
+input:
+G126gat G153gat G1gat new_n258_ new_n274_ 
+output:
+new_n276_
+input:
+G116gat G146gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n326_
+input:
+G189gat G42gat G72gat G73gat new_n149_ new_n394_ 
+output:
+new_n396_
+input:
+G153gat new_n259_ 
+output:
+new_n260_
+input:
+G195gat G237gat G246gat 
+output:
+new_n414_
+input:
+G116gat G210gat G255gat G260gat 
+output:
+new_n420_
+input:
+G143gat G17gat G268gat new_n248_ new_n438_ 
+output:
+new_n441_
+input:
+G106gat G138gat G152gat new_n274_ new_n452_ 
+output:
+new_n454_
+input:
+G149gat G17gat G268gat new_n248_ new_n438_ 
+output:
+new_n465_
+input:
+G146gat G17gat G268gat new_n248_ new_n438_ 
+output:
+new_n475_
+input:
+G106gat G138gat G152gat new_n274_ new_n452_ 
+output:
+new_n453_
+input:
+G101gat G138gat G17gat new_n274_ new_n466_ 
+output:
+new_n467_
+input:
+G138gat G51gat G96gat new_n274_ new_n476_ 
+output:
+new_n477_
+input:
+G153gat G17gat G268gat new_n248_ new_n438_ 
+output:
+new_n451_
+input:
+G106gat new_n263_ new_n265_ new_n268_ new_n271_ new_n447_ 
+output:
+new_n449_
+input:
+G177gat G237gat G246gat 
+output:
+new_n506_
+input:
+G101gat G177gat G210gat new_n150_ new_n300_ 
+output:
+new_n510_
+input:
+G106gat G138gat G152gat G177gat new_n274_ new_n452_ 
+output:
+new_n455_
+input:
+G138gat G8gat 
+output:
+new_n432_
+input:
+G143gat G17gat G268gat new_n249_ new_n439_ 
+output:
+new_n442_
+input:
+G159gat G237gat G246gat 
+output:
+new_n528_
+input:
+G159gat G210gat G268gat new_n150_ new_n300_ 
+output:
+new_n534_
+input:
+G111gat G143gat G183gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n352_
+input:
+G189gat G195gat new_n320_ new_n326_ new_n334_ new_n354_ 
+output:
+new_n456_
+input:
+G106gat G138gat G152gat G177gat new_n274_ new_n451_ 
+output:
+new_n485_
+input:
+G165gat G237gat G246gat 
+output:
+new_n553_
+input:
+G13gat G1gat G55gat G59gat G68gat G8gat 
+output:
+new_n150_
+input:
+G42gat G72gat G73gat 
+output:
+new_n300_
+input:
+G149gat G17gat G268gat new_n249_ new_n439_ 
+output:
+new_n466_
+input:
+G171gat G237gat G246gat 
+output:
+new_n576_
+input:
+G156gat G1gat G26gat G51gat G59gat 
+output:
+new_n265_
+input:
+G17gat G1gat G51gat G8gat 
+output:
+new_n271_
+input:
+G111gat G210gat G255gat G259gat 
+output:
+new_n394_
+input:
+G156gat G1gat G26gat G51gat G55gat G59gat 
+output:
+new_n438_
+input:
+G153gat G17gat G268gat new_n249_ new_n439_ 
+output:
+new_n452_
+input:
+G146gat G17gat G268gat new_n249_ new_n439_ 
+output:
+new_n476_
+input:
+G17gat G42gat 
+output:
+new_n263_
+input:
+G42gat G59gat G75gat 
+output:
+new_n268_
+input:
+G138gat G152gat 
+output:
+new_n447_
+input:
+G1gat G26gat G29gat G51gat G75gat G80gat 
+output:
+new_n249_
+input:
+G156gat G1gat G26gat G51gat G55gat G59gat 
+output:
+new_n439_
+input:
+G121gat G149gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n334_
+input:
+G111gat G143gat G183gat new_n252_ new_n259_ new_n274_ 
+output:
+new_n354_

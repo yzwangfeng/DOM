@@ -1,0 +1,352 @@
+input:
+Gid0 new_n438_ 
+output:
+God0
+input:
+Gid1 new_n444_ 
+output:
+God1
+input:
+Gid2 new_n450_ 
+output:
+God2
+input:
+Gid3 new_n456_ 
+output:
+God3
+input:
+Gid4 new_n467_ 
+output:
+God4
+input:
+Gid5 new_n473_ 
+output:
+God5
+input:
+Gid6 new_n479_ 
+output:
+God6
+input:
+Gid7 new_n485_ 
+output:
+God7
+input:
+Gid8 new_n136_ new_n309_ new_n340_ new_n367_ new_n495_ 
+output:
+God8
+input:
+Gid9 new_n136_ new_n309_ new_n340_ new_n367_ new_n494_ 
+output:
+God9
+input:
+Gid10 new_n136_ new_n309_ new_n340_ new_n367_ new_n494_ 
+output:
+God10
+input:
+Gid11 new_n136_ new_n309_ new_n340_ new_n367_ new_n494_ 
+output:
+God11
+input:
+Gid12 new_n136_ new_n309_ new_n340_ new_n367_ new_n523_ 
+output:
+God12
+input:
+Gid13 new_n136_ new_n309_ new_n340_ new_n367_ new_n522_ 
+output:
+God13
+input:
+Gid14 new_n136_ new_n309_ new_n340_ new_n367_ new_n522_ 
+output:
+God14
+input:
+Gid15 new_n136_ new_n309_ new_n340_ new_n367_ new_n522_ 
+output:
+God15
+input:
+Gid16 new_n253_ new_n340_ new_n367_ new_n550_ new_n560_ 
+output:
+God16
+input:
+Gid17 new_n194_ new_n340_ new_n367_ new_n550_ new_n560_ 
+output:
+God17
+input:
+Gid18 new_n340_ new_n367_ new_n406_ new_n550_ new_n560_ 
+output:
+God18
+input:
+Gid19 new_n340_ new_n367_ new_n432_ new_n550_ new_n560_ 
+output:
+God19
+input:
+Gid20 new_n253_ new_n341_ new_n372_ new_n550_ new_n560_ 
+output:
+God20
+input:
+Gid21 new_n194_ new_n341_ new_n372_ new_n550_ new_n560_ 
+output:
+God21
+input:
+Gid22 new_n341_ new_n372_ new_n406_ new_n550_ new_n560_ 
+output:
+God22
+input:
+Gid23 new_n341_ new_n372_ new_n432_ new_n550_ new_n560_ 
+output:
+God23
+input:
+Gid24 new_n253_ new_n340_ new_n367_ new_n560_ new_n618_ 
+output:
+God24
+input:
+Gid25 new_n194_ new_n340_ new_n367_ new_n560_ new_n618_ 
+output:
+God25
+input:
+Gid26 new_n340_ new_n367_ new_n406_ new_n560_ new_n618_ 
+output:
+God26
+input:
+Gid27 new_n340_ new_n367_ new_n432_ new_n560_ new_n618_ 
+output:
+God27
+input:
+Gid28 new_n253_ new_n341_ new_n372_ new_n560_ new_n618_ 
+output:
+God28
+input:
+Gid29 new_n194_ new_n341_ new_n372_ new_n560_ new_n618_ 
+output:
+God29
+input:
+Gid30 new_n341_ new_n372_ new_n406_ new_n560_ new_n618_ 
+output:
+God30
+input:
+Gid31 new_n341_ new_n372_ new_n432_ new_n560_ new_n618_ 
+output:
+God31
+input:
+new_n136_ new_n254_ new_n309_ new_n340_ new_n367_ new_n434_ 
+output:
+new_n438_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n435_ 
+output:
+new_n444_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n435_ 
+output:
+new_n450_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n435_ 
+output:
+new_n456_
+input:
+new_n136_ new_n254_ new_n309_ new_n340_ new_n367_ new_n463_ 
+output:
+new_n467_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n464_ 
+output:
+new_n473_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n464_ 
+output:
+new_n479_
+input:
+new_n136_ new_n255_ new_n309_ new_n340_ new_n367_ new_n464_ 
+output:
+new_n485_
+input:
+Gic0 Gr new_n108_ new_n131_ new_n93_ 
+output:
+new_n136_
+input:
+Gic1 Gr new_n271_ new_n284_ new_n304_ 
+output:
+new_n309_
+input:
+Gid10 Gid14 Gid2 Gid6 new_n271_ new_n320_ 
+output:
+new_n340_
+input:
+Gid11 Gid15 Gid3 Gid7 new_n284_ new_n347_ 
+output:
+new_n367_
+input:
+new_n150_ new_n190_ new_n253_ new_n406_ new_n417_ new_n428_ 
+output:
+new_n495_
+input:
+new_n150_ new_n190_ new_n406_ new_n417_ new_n428_ new_n491_ 
+output:
+new_n494_
+input:
+new_n150_ new_n190_ new_n417_ new_n428_ new_n462_ new_n491_ 
+output:
+new_n523_
+input:
+new_n150_ new_n190_ new_n417_ new_n428_ new_n462_ new_n491_ 
+output:
+new_n522_
+input:
+Gid0 Gid1 Gid2 Gid3 new_n222_ new_n249_ 
+output:
+new_n253_
+input:
+Gic1 Gr new_n136_ new_n289_ new_n304_ 
+output:
+new_n550_
+input:
+new_n150_ new_n190_ new_n253_ new_n406_ new_n417_ new_n428_ 
+output:
+new_n560_
+input:
+Gid12 Gid13 Gid14 Gid15 new_n165_ new_n186_ 
+output:
+new_n194_
+input:
+Gid18 Gid22 Gid26 Gid30 new_n165_ new_n386_ 
+output:
+new_n406_
+input:
+Gid19 Gid23 Gid27 Gid31 new_n150_ new_n428_ 
+output:
+new_n432_
+input:
+Gid24 Gid25 Gid26 Gid27 new_n320_ new_n331_ 
+output:
+new_n341_
+input:
+Gid28 Gid29 Gid30 Gid31 new_n347_ new_n359_ 
+output:
+new_n372_
+input:
+Gic0 Gr new_n108_ new_n131_ new_n309_ new_n93_ 
+output:
+new_n618_
+input:
+new_n150_ new_n165_ new_n186_ new_n209_ new_n222_ new_n249_ 
+output:
+new_n254_
+input:
+new_n150_ new_n165_ new_n386_ new_n397_ new_n417_ new_n428_ 
+output:
+new_n434_
+input:
+new_n150_ new_n165_ new_n186_ new_n209_ new_n222_ new_n249_ 
+output:
+new_n255_
+input:
+new_n150_ new_n165_ new_n386_ new_n397_ new_n417_ new_n428_ 
+output:
+new_n435_
+input:
+new_n150_ new_n165_ new_n386_ new_n397_ new_n417_ new_n428_ 
+output:
+new_n463_
+input:
+new_n150_ new_n165_ new_n386_ new_n397_ new_n417_ new_n428_ 
+output:
+new_n464_
+input:
+Gid20 Gid21 Gid22 Gid23 
+output:
+new_n108_
+input:
+Gid0 Gid12 Gid4 Gid8 
+output:
+new_n131_
+input:
+Gid16 Gid17 Gid18 Gid19 
+output:
+new_n93_
+input:
+Gid24 Gid25 Gid26 Gid27 
+output:
+new_n271_
+input:
+Gid28 Gid29 Gid30 Gid31 
+output:
+new_n284_
+input:
+Gid1 Gid13 Gid5 Gid9 
+output:
+new_n304_
+input:
+Gic2 Gid16 Gid17 Gid18 Gid19 Gr 
+output:
+new_n320_
+input:
+Gic3 Gid20 Gid21 Gid22 Gid23 Gr 
+output:
+new_n347_
+input:
+Gid12 Gid13 Gid14 Gid15 
+output:
+new_n150_
+input:
+Gid10 Gid11 Gid8 Gid9 new_n186_ 
+output:
+new_n190_
+input:
+Gid19 Gid23 Gid27 Gid31 
+output:
+new_n417_
+input:
+Gic7 Gid4 Gid5 Gid6 Gid7 Gr 
+output:
+new_n428_
+input:
+Gid0 Gid1 Gid2 Gid3 new_n222_ new_n249_ 
+output:
+new_n491_
+input:
+Gid18 Gid22 Gid26 Gid30 new_n165_ new_n386_ 
+output:
+new_n462_
+input:
+Gid16 Gid20 Gid24 Gid28 
+output:
+new_n222_
+input:
+Gic4 Gid4 Gid5 Gid6 Gid7 Gr 
+output:
+new_n249_
+input:
+Gid24 Gid25 Gid26 Gid27 Gid29 new_n280_ 
+output:
+new_n289_
+input:
+Gid10 Gid11 Gid8 Gid9 
+output:
+new_n165_
+input:
+Gic5 Gid17 Gid21 Gid25 Gid29 Gr 
+output:
+new_n186_
+input:
+Gic6 Gid0 Gid1 Gid2 Gid3 Gr 
+output:
+new_n386_
+input:
+Gid10 Gid14 Gid2 Gid6 
+output:
+new_n331_
+input:
+Gid11 Gid15 Gid3 Gid7 
+output:
+new_n359_
+input:
+Gid0 Gid1 Gid2 Gid3 
+output:
+new_n209_
+input:
+Gid18 Gid22 Gid26 Gid30 
+output:
+new_n397_
+input:
+Gid28 Gid30 Gid31 
+output:
+new_n280_
