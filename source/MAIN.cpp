@@ -75,12 +75,13 @@ int main(int argc, char *argv[]) {
     queue<string> Q;
     map<string, int> ind;
     int Luts = 6;
-    unsigned int C = 240;  // record the most C Cuts
-    string dir = "benchmark/new";
-    string outdir = "result/new";
+    unsigned int C = 15;  // record the most C Cuts
+    string dir = "benchmark/ISCAS85";
+    string outdir = "result/ISCAS85";
     get_file_name(dir, benchmark);
 
     for (string str : benchmark) {
+	cout << str << endl;
         double total_time;
         clock_t start = clock();
 
@@ -89,11 +90,13 @@ int main(int argc, char *argv[]) {
 
         out = fopen((outdir + "/" + str + ".out").c_str(), "w");
 
-        for (pair<string, Var*> p : c.graph)
+        for (pair<string, Var*> p : c.graph) {
             ind[p.first] = p.second->pre.size();
+	    p.second->mindep = 0;
+	}
 
         for (string s : c.input) {           // Initial queue
-            c.graph[s]->cuts.insert(set<string> { s });
+            c.graph[s]->cuts[1].insert(set<string> { s });
             c.graph[s]->mindep = 0;
             c.graph[s]->Area = 0;
             c.graph[s]->AreaFlow = 0;
@@ -109,27 +112,29 @@ int main(int argc, char *argv[]) {
             string now = Q.front();
             //cout << now << endl;
             Q.pop();
-            c.graph[now]->cuts.insert(set<string> { now });
+            c.graph[now]->cuts[1].insert(set<string> { now });
             assert(c.graph[now]->pre.size() <= 2);
             if (c.graph[now]->pre.size() == 2) {
                 string input1 = c.graph[now]->pre[0];
                 string input2 = c.graph[now]->pre[1];
-
-                for (set<string> c1 : c.graph[input1]->cuts) {
-                    for (set<string> c2 : c.graph[input2]->cuts) {
-                        set<string> st = c1;
-                        st.insert(c2.begin(), c2.end());
-                        if (st.size() > (unsigned) Luts)
-                            continue;
-                        c.graph[now]->cuts.insert(st);
-                    }
-                }
+		for (int t = 1; t <= Luts; t++)
+	       	    for (set<string> c1 : c.graph[input1]->cuts[t]) {
+			for (int k = 1; k <= Luts; k++)
+                             for (set<string> c2 : c.graph[input2]->cuts[k]) {
+                                set<string> st = c1;
+                                st.insert(c2.begin(), c2.end());
+                                if (st.size() > (unsigned) Luts)
+                                    continue;
+                                c.graph[now]->cuts[st.size()].insert(st);
+                            }
+                        }
             }
 
             if (c.graph[now]->pre.size() == 1) {
                 string input1 = c.graph[now]->pre[0];
-                for (set<string> c1 : c.graph[input1]->cuts)
-                    c.graph[now]->cuts.insert(c1);
+		for (int k = 1; k <= Luts; k++)
+                    for (set<string> c1 : c.graph[input1]->cuts[k])
+                        c.graph[now]->cuts[k].insert(c1);
             }
 
             for (string nt : c.graph[now]->suc) {
@@ -139,23 +144,24 @@ int main(int argc, char *argv[]) {
             }
 
             /*Calculate dep, areaflow, exact area*/
-            vector<Cut> Cuts;
+            vector<Cut> Cuts[10], Ct;
             c.graph[now]->mindep = INF;
             c.graph[now]->Area = INF;
             c.graph[now]->AreaFlow = inf;
-            for (set<string> ct : c.graph[now]->cuts) {
-                int dep = 0, area = 0;
-                double AF = 0;
-                for (string nt : ct) {
-                    dep = max(dep, c.graph[nt]->mindep);
-                    area += c.graph[nt]->Area;
-                    AF += c.graph[nt]->AreaFlow;
-                }
-                dep++, area++;
-                AF /= max(1.0, 1.0 * c.graph[now]->suc.size());
+	    for (int k = 1; k <= Luts; k++)
+	        for (set<string> ct : c.graph[now]->cuts[k]) {
+                    int dep = 0, area = 0;
+                    double AF = 0;
+                    for (string nt : ct) {
+                        dep = max(dep, c.graph[nt]->mindep);
+                        area += c.graph[nt]->Area;
+                        AF += c.graph[nt]->AreaFlow;
+                    }
+                    dep++, area++;
+                    AF /= max(1.0, 1.0 * c.graph[now]->suc.size());
 
-                Cuts.push_back(Cut(ct, dep, area, AF));
-
+                    Cuts[k].push_back(Cut(ct, dep, area, AF));
+		    Ct.push_back(Cut(ct, dep, area, AF));
                 /*Compare dep*/
                 /*if (dep < c.graph[now]->mindep) {
                  c.graph[now]->mindep = dep;
@@ -184,25 +190,31 @@ int main(int argc, char *argv[]) {
                  }*/
 
             }
-            sort(Cuts.begin(), Cuts.end(), cmp_Depth2);
-            c.graph[now]->cuts.clear();
-            unsigned int len = Cuts.size();
+	    //if (now == "G473") 
+            //		cout << Cuts.size() << endl;
+            for (int k = 1; k <= Luts; k++) {
+                sort(Cuts[k].begin(), Cuts[k].end(), cmp_Depth2);
+            	c.graph[now]->cuts[k].clear();
+            	unsigned int len = Cuts[k].size();
             //cout << "now:" << now << endl;
-            for (unsigned int i = 0; i < min(C, len); i++) {
-                c.graph[now]->cuts.insert(Cuts[i].names);
+            	for (unsigned int i = 0; i < min(C, len); i++) {
+                	c.graph[now]->cuts[k].insert(Cuts[k][i].names);
                 //cout << Cuts[i].mindep << endl;
-            }
+            	}
+            }		
             //if (c.graph[now]->pre.size() != 1)
-            c.graph[now]->cuts.insert(set<string> { now });
+            c.graph[now]->cuts[1].insert(set<string> { now });
             /*for (string s : Cuts[0].names)
              cout << s << endl;*/
-            c.graph[now]->mindep = Cuts[0].mindep;
-            c.graph[now]->AreaFlow = Cuts[0].AreaFlow;
-            c.graph[now]->Area = Cuts[0].Area;
-            c.graph[now]->Rcut = Cuts[0].names;
+	    sort(Ct.begin(), Ct.end(), cmp_Depth2);
+            c.graph[now]->mindep = Ct[0].mindep;
+            c.graph[now]->AreaFlow = Ct[0].AreaFlow;
+            c.graph[now]->Area = Ct[0].Area;
+            c.graph[now]->Rcut = Ct[0].names;
             //cout << c.graph[now]->mindep << endl;
         }
         Output(c);
+	//cout << c.abc_lut_area << endl;
         clock_t finish = clock();
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
         cout << "Run time: " << total_time << "s" << endl;
