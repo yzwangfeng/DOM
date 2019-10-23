@@ -67,7 +67,10 @@ void Output(Circuit c) {
         }
         fprintf(out, "%s\n", ("\noutput:\n" + now).c_str());
     }
-    fprintf(stdout, "Area: %d\nDepth: %d\n", area, dep - 1);
+
+    fstream fout("result/overall.txt", ios::app);
+    fout << c.benchmark << ' ' << area << ' ' << c.abc_lut_area << endl;
+    fout.close();
 }
 
 int main(int argc, char *argv[]) {

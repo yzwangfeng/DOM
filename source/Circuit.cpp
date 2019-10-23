@@ -78,7 +78,6 @@ void Circuit::abc_synthesize() {
 
         min_cycle = min(min_cycle, cycle);
         if (last_cycle == cycle) {
-            cout << "Total cycle: " << cycle << endl;
             break;
         }
         last_cycle = cycle;
