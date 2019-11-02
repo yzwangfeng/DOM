@@ -22,17 +22,41 @@
 #define inf 100000000
 #define INF 100000000
 
-struct Cut {
+struct DoubleCut {
     set<string> names;
+    string Name1, Name2;
     int mindep, Area;
     double AreaFlow;
-    Cut() {
+    DoubleCut() {
+        Name1 = "", Name2 = "";
         mindep = 0;
         Area = 0;
         AreaFlow = 0;
     }
-    Cut(set<string> n, int dep, int area, double AF) {
+    DoubleCut(set<string> n, string nm1, string nm2, int dep, int area, double AF) {
         names = n;
+        Name1 = nm1, Name2 = nm2;
+        mindep = dep;
+        Area = area;
+        AreaFlow = AF;
+    }
+};
+
+
+struct Cut {
+    set<string> names;
+    string Name;
+    int mindep, Area;
+    double AreaFlow;
+    Cut() {
+	Name = "";
+        mindep = 0;
+        Area = 0;
+        AreaFlow = 0;
+    }
+    Cut(set<string> n, string nm, int dep, int area, double AF) {
+        names = n;
+	Name = nm;
         mindep = dep;
         Area = area;
         AreaFlow = AF;
@@ -47,6 +71,8 @@ struct Var {
     vector<string> suc;     // successors
     set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
+    set<string> Rdcut;
+    string Partner;
 
     int out_degree;         // = suc.size()
     int mindep, Area;
@@ -61,6 +87,7 @@ struct Circuit {
 
     map<string, Var*> graph;
     int graph_size;         // = graph.size()
+    int Dep;
 
     vector<string> input;
     vector<string> output;
