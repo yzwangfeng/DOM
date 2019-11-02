@@ -29,6 +29,7 @@ Var::Var(string name_, bool is_in_, bool is_out_)
 Circuit::Circuit(string benchmark_)
         :
         benchmark(benchmark_) {
+    Dep = 0;
     abc_iter = graph_size = 0;
     memset(abc_lut, 0, sizeof(abc_lut));
     abc_lut_area = 0;
@@ -78,6 +79,7 @@ void Circuit::abc_synthesize() {
 
         min_cycle = min(min_cycle, cycle);
         if (last_cycle == cycle) {
+            cout << "Total cycle: " << cycle << endl;
             break;
         }
         last_cycle = cycle;
@@ -141,11 +143,11 @@ void Circuit::abc_lut_map(char *lib) {
     char input_file[256], lut_file[256], lutlib_file[256];
     sprintf(input_file, "%s", benchmark.c_str());
     sprintf(lut_file, "%s_lut.blif", benchmark.c_str());
-    sprintf(lutlib_file, "abclib/%s", lib);
+    sprintf(lutlib_file, "abclib/%s.blif", lib);
     abc_lutpack(input_file, lut_file, lib);
 
     int area[10] = { }, delay[10] = { };
-    sprintf(lutlib_file, "abclib/%s", lib);
+    sprintf(lutlib_file, "abclib/%s.blif", lib);
     ifstream fin_lut(lutlib_file, ios::in);
     if (!fin_lut.is_open()) {
         return;
