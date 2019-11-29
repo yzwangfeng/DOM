@@ -56,10 +56,14 @@ struct Cut {
     }
     Cut(set<string> n, string nm, int dep, int area, double AF) {
         names = n;
-	Name = nm;
+	    Name = nm;
         mindep = dep;
         Area = area;
         AreaFlow = AF;
+    }
+    bool operator < (const Cut A) const{
+        return mindep > A.mindep || (mindep == A.mindep && Area < A.Area) 
+               || (mindep == A.mindep && Area == A.Area && AreaFlow < A.AreaFlow);
     }
 };
 
@@ -71,7 +75,8 @@ struct Var {
     vector<string> suc;     // successors
     set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
-    set<string> Rdcut;
+    //set<string> Rdcut;
+    Cut Fcut; // First Cut
     string Partner;
 
     int out_degree;         // = suc.size()
