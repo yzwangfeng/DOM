@@ -73,6 +73,8 @@ struct Var {
 
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
+    bool truth_table[3];
+
     set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
     //set<string> Rdcut;
@@ -103,9 +105,9 @@ struct Circuit {
     Circuit(string benchmark_);
     ~Circuit();
 
-    void abc_synthesize();  // synthesize the circuit using a customized library
+    void synthesize();  // synthesize the circuit using a customized library
     void read_blif();
-    void abc_lut_map(char* lib);
+    void abc_lut_map(string lib);
 
     void write_dot();       // visualize the circuit
 };

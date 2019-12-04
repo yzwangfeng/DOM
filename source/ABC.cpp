@@ -1,158 +1,77 @@
 #include "ABC.h"
 
-int abc_simplify(char *in_file, char *write_cmd, char *out_file) {  // 调用abc
-    void *pAbc;
-    char Command[1000];
+map<string, string> alias;
 
-    Abc_Start();
-    pAbc = Abc_FrameGetGlobalFrame();
-
-    sprintf(Command, "read %s", in_file);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-#ifdef DEBUG
-	sprintf(Command, "print_stats");
-	if (Cmd_CommandExecute(pAbc, Command)) {
-		fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-		return 1;
-	}
-#endif
-
-    sprintf(Command, "fraig_store; balance; rewrite; rewrite -z; balance; rewrite -z; balance;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command,
-            "fraig_store; balance; rewrite; refactor; balance; rewrite; rewrite -z; balance; refactor -z; rewrite -z; balance;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "fraig_store; fraig_restore;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "%s %s", write_cmd, out_file);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-#ifdef DEBUG
-	sprintf(Command, "print_stats");
-	if (Cmd_CommandExecute(pAbc, Command)) {
-		fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-		return 1;
-	}
-	sprintf(Command, "cec %s %s", in_file, out_file);	// 检验转换前后电路是否等价，非常耗时
-	if (Cmd_CommandExecute(pAbc, Command)) {
-		fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-		return 1;
-	}
-#endif
-
-    Abc_Stop();
-    return 0;
+void abc_initialize() {
+    alias["b"] = "balance;";
+    alias["rw"] = "rewrite;";
+    alias["rwz"] = "rewrite -z;";
+    alias["rf"] = "refactor;";
+    alias["rfz"] = "refactor -z;";
+    alias["resyn"] = alias["b"] + alias["rw"] + alias["rwz"] + alias["b"] + alias["rwz"] + alias["b"];
+    alias["resyn2"] = alias["b"] + alias["rw"] + alias["rf"] + alias["b"] + alias["rw"] + alias["rwz"]
+            + alias["b"] + alias["rfz"] + alias["rwz"] + alias["b"];
+    alias["choice"] = "fraig_store;" + alias["resyn"] + "fraig_store;" + alias["resyn2"] + "fraig_store;"
+            + "fraig_restore;";
 }
 
-int abc_map(char *in_file, char *out_file, char *lib) {  // 调用abc的map指令
+void execute_command(string s) {
     void *pAbc;
-    char Command[1000];
+    char command[10000];
 
     Abc_Start();
     pAbc = Abc_FrameGetGlobalFrame();
 
-    sprintf(Command, "read_library abclib/%s", lib);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "read %s", in_file);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "fraig_store; balance; rewrite; rewrite -z; balance; rewrite -z; balance;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command,
-            "fraig_store; balance; rewrite; refactor; balance; rewrite; rewrite -z; balance; refactor -z; rewrite -z; balance;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "fraig_store; fraig_restore;");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "map -a");  // area-only mapping
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "write_blif %s", out_file);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
+    sprintf(command, s.c_str());
+    if (Cmd_CommandExecute(pAbc, command)) {
+        fprintf( stdout, "Cannot execute command \"%s\".\n", command);
     }
 
     Abc_Stop();
-    return 0;
 }
 
-int abc_lutpack(char *in_file, char *out_file, char *lib) {  // 调用abc的lutpack指令
-    abc_simplify(in_file, (char*) "write_blif", (char*) "tmp.blif");
+void abc_check_equivalence(string in_file, string out_file) {
+    abc_initialize();
+    string command = "cec %s %s" + in_file + out_file + ";";
+    execute_command(command);
+}
 
-    void *pAbc;
-    char Command[1000];
+void abc_synthesize(string in_file, string write_cmd, string out_file) {
+    abc_initialize();
+    string command = "read " + in_file + ";";
+    command += alias["resyn"] + alias["resyn2"];
+    command += write_cmd + " " + out_file + ";";
+    execute_command(command);
+}
 
-    Abc_Start();
-    pAbc = Abc_FrameGetGlobalFrame();
+void abc_map(string in_file, string write_cmd, string out_file, string lib) {
+    abc_initialize();
+    abc_synthesize(in_file, "write_blif", "tmp.blif");
 
-    sprintf(Command, "read_lut abclib/%s", lib);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "read %s", "tmp.blif");
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "lutpack");  // an area-oriented resynthesis engine for network mapped into K-LUTs
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    sprintf(Command, "write_blif %s", out_file);
-    if (Cmd_CommandExecute(pAbc, Command)) {
-        fprintf( stdout, "Cannot execute command \"%s\".\n", Command);
-        return 1;
-    }
-
-    Abc_Stop();
+    string command = "read_library abclib/" + lib + ";";
+    command += "read tmp.blif;";
+    command += "map -a;";  // area-only mapping
+    command += write_cmd + " " + out_file + ";";
+    execute_command(command);
 
     remove("tmp.blif");
+}
 
-    return 0;
+void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) {
+    abc_initialize();
+    abc_synthesize(in_file, "write_blif", "tmp.blif");
+
+    string command = "read_lut abclib/" + lib + ";";
+    command += "read tmp.blif;";
+    command += "if;";
+    for (int i = 0; i < 4; ++i) {
+        command += alias["choice"] + "if;mfs;";
+    }
+    for (int i = 0; i < 2; ++i) {
+        command += "lutpack;";
+    }
+    command += write_cmd + " " + out_file + ";";
+    execute_command(command);
+
+    remove("tmp.blif");
 }

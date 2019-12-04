@@ -24,6 +24,8 @@ Var::Var(string name_, bool is_in_, bool is_out_)
         :
         name(name_), is_in(is_in_), is_out(is_out_) {
     out_degree = 0;
+    mindep = Area = 0;
+    AreaFlow = 0;
 }
 
 Circuit::Circuit(string benchmark_)
@@ -34,10 +36,10 @@ Circuit::Circuit(string benchmark_)
     memset(abc_lut, 0, sizeof(abc_lut));
     abc_lut_area = 0;
 
-    abc_synthesize();
+    synthesize();
     read_blif();
 
-    abc_lut_map((char*) "6LUT.lutlib");     // change it to your own LUT library
+    abc_lut_map("6LUT.lutlib");     // change it to your own LUT library
 
     //write_dot();
 }
@@ -50,17 +52,15 @@ Circuit::~Circuit() {
     remove(lut_file);
 }
 
-void Circuit::abc_synthesize() {
+void Circuit::synthesize() {
     int min_cycle = inf, last_cycle = inf;
-    char file[256], new_file[256];
+    string file = benchmark, new_file;
     for (abc_iter = 1; abc_iter <= 100; ++abc_iter) {
-        if (abc_iter == 1) {
-            sprintf(file, "%s", benchmark.c_str());
-        } else {
-            strcpy(file, new_file);
+        if (abc_iter > 1) {
+            file = new_file;
         }
-        sprintf(new_file, "%s_%d.blif", benchmark.c_str(), abc_iter);
-        abc_map(file, new_file, (char*) "NOR2.genlib");
+        new_file = benchmark + "_" + to_string(abc_iter) + ".blif";
+        abc_synthesize(file, "write_blif", new_file);
 
         ifstream fin(new_file, ios::in);
         if (!fin.is_open()) {
@@ -69,12 +69,11 @@ void Circuit::abc_synthesize() {
         string s;
         int cycle = 0;
         while (fin >> s) {
-            cycle += s == ".gate";
+            cycle += s == ".names";
         }
-
         fin.close();
         if (abc_iter != 1) {
-            remove(file);
+            remove(file.c_str());
         }
 
         min_cycle = min(min_cycle, cycle);
@@ -103,7 +102,7 @@ void Circuit::read_blif() {
             graph[s] = new Var(s, true, false);
         }
     }
-    while (fin >> s && s != ".gate") {
+    while (fin >> s && s != ".names") {
         if (s != "\\") {
             output.push_back(s);
             graph[s] = new Var(s, false, true);
@@ -118,37 +117,37 @@ void Circuit::read_blif() {
         getline(fin, s);
         vector<string> cells = split(s, " ");
 
-        string out_cell = (*cells.rbegin()).substr(2);
+        string out_cell = (*cells.rbegin());
         if (find(output.begin(), output.end(), out_cell) == output.end()) {
             graph[out_cell] = new Var(out_cell, false, false);
         }
 
         cells.erase(cells.begin());
 
+        getline(fin, s);
+        int bias = 0;
         for (string cell : cells) {
-            cell = cell.substr(2);
             if (cell != out_cell) {
                 graph[cell]->suc.push_back(out_cell);
                 ++graph[cell]->out_degree;
                 graph[out_cell]->pre.push_back(cell);
+                graph[out_cell]->truth_table[bias] = atoi(s.substr(bias, 1).c_str());
+                ++bias;
             }
+            int x = bias + 1;
+            graph[out_cell]->truth_table[bias] = atoi(s.substr(x, 1).c_str());
         }
 
         ++graph_size;
-    } while (fin >> s && s == ".gate");
+    } while (fin >> s && s == ".names");
     fin.close();
 }
 
-void Circuit::abc_lut_map(char *lib) {
-    char input_file[256], lut_file[256], lutlib_file[256];
-    sprintf(input_file, "%s", benchmark.c_str());
-    sprintf(lut_file, "%s_lut.blif", benchmark.c_str());
-    sprintf(lutlib_file, "abclib/%s.blif", lib);
-    abc_lutpack(input_file, lut_file, lib);
+void Circuit::abc_lut_map(string lib) {
+    abc_lutpack(benchmark, "write_blif", benchmark + "_lut.blif", lib);
 
     int area[10] = { }, delay[10] = { };
-    sprintf(lutlib_file, "abclib/%s.blif", lib);
-    ifstream fin_lut(lutlib_file, ios::in);
+    ifstream fin_lut("abclib/" + lib, ios::in);
     if (!fin_lut.is_open()) {
         return;
     }
@@ -161,7 +160,7 @@ void Circuit::abc_lut_map(char *lib) {
     }
     fin_lut.close();
 
-    ifstream fin(lut_file, ios::in);
+    ifstream fin(benchmark + "_lut.blif", ios::in);
     if (!fin.is_open()) {
         return;
     }
