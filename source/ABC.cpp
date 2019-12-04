@@ -32,7 +32,7 @@ void execute_command(string s) {
 
 void abc_check_equivalence(string in_file, string out_file) {
     abc_initialize();
-    string command = "cec %s %s" + in_file + out_file + ";";
+    string command = "cec " + in_file + " " + out_file + ";";
     execute_command(command);
 }
 
