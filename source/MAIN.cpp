@@ -196,7 +196,7 @@ int main(int argc, char *argv[]) {
     get_file_name(dir, benchmark);
 
     for (string str : benchmark) {
-		cout << str  << endl;
+		cout << str << endl;
 		//string str = "cir1.v"; {
         double total_time;
         clock_t start = clock();

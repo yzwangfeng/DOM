@@ -109,21 +109,13 @@ void Circuit::read_blif() {
         }
     }
 
-    graph_size = 0;
     do {
-        string gate;
-        fin >> gate;
-
         getline(fin, s);
-        vector<string> cells = split(s, " ");
-
+        vector<string> cells = split(s.substr(1), " ");
         string out_cell = (*cells.rbegin());
         if (find(output.begin(), output.end(), out_cell) == output.end()) {
             graph[out_cell] = new Var(out_cell, false, false);
         }
-
-        cells.erase(cells.begin());
-
         getline(fin, s);
         int bias = 0;
         for (string cell : cells) {
@@ -137,7 +129,6 @@ void Circuit::read_blif() {
             int x = bias + 1;
             graph[out_cell]->truth_table[bias] = atoi(s.substr(x, 1).c_str());
         }
-
         ++graph_size;
     } while (fin >> s && s == ".names");
     fin.close();
