@@ -190,14 +190,14 @@ int main(int argc, char *argv[]) {
     vector<string> benchmark;
     queue<string> Q;
     map<string, int> ind;
-    unsigned int C = 15;  // record the most C Cuts
-    string dir = "benchmark/ISCAS85";
-    string outdir = "result/ISCAS85";
+    unsigned int C = 8;  // record the most C Cuts
+    string dir = "benchmark/EPFL";
+    string outdir = "result/EPFL";
     get_file_name(dir, benchmark);
 
-    for (string str : benchmark) {
-		cout << str << endl;
-		//string str = "cir1.v"; {
+   for (string str : benchmark) {
+        cout << str << endl;
+	//string str = "arbiter.blif"; {
         double total_time;
         clock_t start = clock();
 
@@ -288,7 +288,7 @@ int main(int argc, char *argv[]) {
 				}
             }
             for (int k = 1; k <= Luts; k++) {
-                sort(Cuts[k].begin(), Cuts[k].end(), cmp_Depth2);
+                sort(Cuts[k].begin(), Cuts[k].end(), cmp_Depth);
             	c.graph[now]->cuts[k].clear();
             	unsigned int len = Cuts[k].size();
 				//cout << "now:" << now << endl;
@@ -299,7 +299,7 @@ int main(int argc, char *argv[]) {
             }		
             //if (c.graph[now]->pre.size() != 1)
             c.graph[now]->cuts[1].insert(set<string> { now });
-			sort(Ct.begin(), Ct.end(), cmp_Depth2);
+			sort(Ct.begin(), Ct.end(), cmp_Depth);
 			int Depth = Ct[0].mindep;
             c.graph[now]->mindep = Ct[0].mindep;
             c.graph[now]->AreaFlow = Ct[0].AreaFlow;

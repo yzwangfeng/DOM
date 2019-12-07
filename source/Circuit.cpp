@@ -1,4 +1,5 @@
 #include "Circuit.h"
+#include "Match.h"
 
 vector<string> split(string str, string separator) {    // split a string by the separator
     vector<string> dest;
@@ -173,12 +174,17 @@ void Circuit::abc_lut_map(string lib) {
         getline(fin, s);
         vector<string> names = split(s, " ");
         ++abc_lut[names.size() - 2];
+//	for (int i = 0; i < names.size(); i++)
+//	    cout << names[i] << endl;
     }
     fin.close();
 
     for (int i = 0; i < 10; ++i) {
         abc_lut_area += abc_lut[i] * area[i];
     }
+    cout << "ABC Area1: " << abc_lut_area << endl;
+    Match *mt = new Match();
+    cout << "ABC Area2: " << abc_lut_area - mt->getMatch(benchmark + "_lut.blif")<< endl;
 }
 
 void Circuit::write_dot() {
@@ -191,7 +197,9 @@ void Circuit::write_dot() {
 
     fout << "digraph G {\nsize = \"7.5,10\";\ncenter = true;" << endl;
     for (pair<string, Var*> p : graph) {
-        fout << p.first;
+	//for (int i = 0; i < p.first.length(); i++)
+	//    if (p.first[i] != '[' && p.first[i] != ']')
+       	fout << p.first;
         if (p.second->is_in) {
             fout << "[shape = invtriangle, color = coral, fillcolor = coral];" << endl;
         } else if (p.second->is_out) {
