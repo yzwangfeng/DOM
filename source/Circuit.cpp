@@ -72,13 +72,14 @@ void Circuit::synthesize() {
         while (fin >> s) {
             cycle += s == ".gate";
         }
+
         fin.close();
         if (abc_iter != 1) {
             remove(file.c_str());
         }
 
         min_cycle = min(min_cycle, cycle);
-        if (last_cycle == cycle) {
+        if (last_cycle >= cycle) {
             break;
         }
         last_cycle = cycle;
@@ -102,36 +103,42 @@ void Circuit::read_blif() {
             graph[s] = new Var(s, true, false);
         }
     }
-    while (fin >> s && s != ".names") {
+    while (fin >> s && s != ".gate") {
         if (s != "\\") {
             output.push_back(s);
             graph[s] = new Var(s, false, true);
         }
     }
 
+    graph_size = 0;
     do {
+        string gate;
+        fin >> gate;
+
         getline(fin, s);
-        vector<string> cells = split(s.substr(1), " ");
-        string out_cell = (*cells.rbegin());
+        vector<string> cells = split(s, " ");
+
+        string out_cell = (*cells.rbegin()).substr(2);
         if (find(output.begin(), output.end(), out_cell) == output.end()) {
             graph[out_cell] = new Var(out_cell, false, false);
         }
-        getline(fin, s);
-        int bias = 0;
+        graph[out_cell]->gate = gate;
+        cout <<gate<<endl;
+
+        cells.erase(cells.begin());
+
         for (string cell : cells) {
+            cell = cell.substr(2);
             if (cell != out_cell) {
                 graph[cell]->suc.push_back(out_cell);
                 ++graph[cell]->out_degree;
                 graph[out_cell]->pre.push_back(cell);
-                graph[out_cell]->truth_table[bias] = atoi(s.substr(bias, 1).c_str());
-                ++bias;
             }
-            int x = bias + 1;
-            graph[out_cell]->truth_table[bias] = atoi(s.substr(x, 1).c_str());
         }
+
         ++graph_size;
-    } while (fin >> s && s == ".names");
-    cout << "Total cycle: " << graph_size << endl;
+    } while (fin >> s && s == ".gate");
+    cout << "Total gates: " << graph_size << endl;
     fin.close();
 }
 

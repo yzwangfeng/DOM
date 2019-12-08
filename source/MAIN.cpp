@@ -191,8 +191,8 @@ int main(int argc, char *argv[]) {
     queue<string> Q;
     map<string, int> ind;
     unsigned int C = 8;  // record the most C Cuts
-    string dir = "benchmark/ISCAS85";
-    string outdir = "result/ISCAS85";
+    string dir = "benchmark/EPFL";
+    string outdir = "result/EPFL";
     get_file_name(dir, benchmark);
 
    for (string str : benchmark) {
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]) {
 
         Circuit c = Circuit(dir + "/" + str);  // already synthesized
         //c.write_dot();
-exit(1);
+
         out1 = fopen((outdir + "/" + str + ".out1").c_str(), "w");
         out2 = fopen((outdir + "/" + str + ".out2").c_str(), "w");
 

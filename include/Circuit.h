@@ -73,7 +73,7 @@ struct Var {
 
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
-    bool truth_table[3];
+    string gate;
 
     set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
