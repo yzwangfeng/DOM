@@ -1,0 +1,12 @@
+GATE SET		1	Y=CONST0;
+GATE RESET		1	Y=CONST1;
+GATE BUFF		1	Y=A;						PIN * NONINV 1 999 0 0 0 0
+GATE NOT		1	Y=!A;						PIN * INV 1 999 0 0 0 0
+GATE OR1		1	Y=A+B;						PIN * NONINV 1 999 0 0 0 0
+GATE OR2		1	Y=!A+B;						PIN * UNKNOWN 1 999 0 0 0 0
+GATE OR3		1	Y=!A+!B;					PIN * INV 1 999 0 0 0 0
+GATE AND1    	1	Y=A*B;                      PIN * NONINV 1 999 0 0 0 0
+GATE AND2    	1	Y=!A*B;                     PIN * UNKNOWN 1 999 0 0 0 0
+GATE AND3    	1	Y=!A*!B;                    PIN * INV 1 999 0 0 0 0
+GATE XOR2X1   	1	Y=(A*!B)+(!A*B);            PIN * UNKNOWN 1 999 0 0 0 0
+GATE XNOR2X1   	1	Y=(A*B)+(!A*!B);            PIN * UNKNOWN 1 999 0 0 0 0

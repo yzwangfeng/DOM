@@ -1,5 +1,4 @@
 #include "Circuit.h"
-#include <bits/stdc++.h>
 
 #define mem(x) memset(x, 0, sizeof(x))
 

@@ -46,15 +46,12 @@ void abc_synthesize(string in_file, string write_cmd, string out_file) {
 
 void abc_map(string in_file, string write_cmd, string out_file, string lib) {
     abc_initialize();
-    abc_synthesize(in_file, "write_blif", "tmp.blif");
-
     string command = "read_library abclib/" + lib + ";";
-    command += "read tmp.blif;";
+    command += "read " + in_file + ";";
+    command += alias["resyn"] + alias["resyn2"];
     command += "map -a;";  // area-only mapping
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
-
-    remove("tmp.blif");
 }
 
 void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) {

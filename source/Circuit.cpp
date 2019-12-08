@@ -61,7 +61,7 @@ void Circuit::synthesize() {
             file = new_file;
         }
         new_file = benchmark + "_" + to_string(abc_iter) + ".blif";
-        abc_synthesize(file, "write_blif", new_file);
+        abc_map(file, "write_blif", new_file, "2INPUT.genlib");
 
         ifstream fin(new_file, ios::in);
         if (!fin.is_open()) {
@@ -70,7 +70,7 @@ void Circuit::synthesize() {
         string s;
         int cycle = 0;
         while (fin >> s) {
-            cycle += s == ".names";
+            cycle += s == ".gate";
         }
         fin.close();
         if (abc_iter != 1) {
@@ -79,7 +79,6 @@ void Circuit::synthesize() {
 
         min_cycle = min(min_cycle, cycle);
         if (last_cycle == cycle) {
-            cout << "Total cycle: " << cycle << endl;
             break;
         }
         last_cycle = cycle;
@@ -132,6 +131,7 @@ void Circuit::read_blif() {
         }
         ++graph_size;
     } while (fin >> s && s == ".names");
+    cout << "Total cycle: " << graph_size << endl;
     fin.close();
 }
 
