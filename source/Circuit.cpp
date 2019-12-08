@@ -123,8 +123,6 @@ void Circuit::read_blif() {
             graph[out_cell] = new Var(out_cell, false, false);
         }
         graph[out_cell]->gate = gate;
-        cout <<gate<<endl;
-
         cells.erase(cells.begin());
 
         for (string cell : cells) {
