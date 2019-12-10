@@ -56,10 +56,9 @@ void abc_map(string in_file, string write_cmd, string out_file, string lib) {
 
 void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) {
     abc_initialize();
-    abc_synthesize(in_file, "write_blif", "tmp.blif");
-
     string command = "read_lut abclib/" + lib + ";";
-    command += "read tmp.blif;";
+    command += "read " + in_file + ";";
+    command += alias["resyn"] + alias["resyn2"];
     command += "if;";
     for (int i = 0; i < 4; ++i) {
         command += alias["choice"] + "if;mfs;";
@@ -69,6 +68,4 @@ void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) 
     }
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
-
-    remove("tmp.blif");
 }

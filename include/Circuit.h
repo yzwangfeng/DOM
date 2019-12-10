@@ -71,9 +71,10 @@ struct Var {
     string name;
     bool is_in, is_out;
 
+    int depth;
+
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
-    string gate;
 
     set<set<string> > cuts[10];  //K cuts
     set<string> Rcut;      //represent cut
@@ -81,7 +82,6 @@ struct Var {
     Cut Fcut; // First Cut
     string Partner;
 
-    int out_degree;         // = suc.size()
     int mindep, Area;
     double AreaFlow;
 
@@ -90,10 +90,8 @@ struct Var {
 
 struct Circuit {
     string benchmark;
-    int abc_iter;           // file name = $benchmark$_$abc_iter$.blif
 
     map<string, Var*> graph;
-    int graph_size;         // = graph.size()
     int Dep;
 
     vector<string> input;
@@ -105,9 +103,9 @@ struct Circuit {
     Circuit(string benchmark_);
     ~Circuit();
 
-    void synthesize();  // synthesize the circuit using a customized library
-    void read_blif();
-    void abc_lut_map(string lib);
+    void standard_cell_map(string lib);
+    void lut_map(string lib);
+    void decompose(string var);
 
     void write_dot();       // visualize the circuit
 };
