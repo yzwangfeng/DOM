@@ -44,6 +44,14 @@ Circuit::Circuit(string benchmark_)
         decompose(s);
     }
 
+//    for (auto p : graph) {
+//        cout << p.first << ' ' << p.second->depth << ' ';
+//        for (string s : p.second->pre) {
+//            cout << s << ' ' << graph[s]->depth << ' ';
+//        }
+//        cout << endl;
+//    }
+
     //write_dot();
 }
 
@@ -116,8 +124,7 @@ void Circuit::lut_map(string lib) {
     }
     fin_lut.close();
 
-    //abc_lutpack(benchmark, "write_blif", benchmark + "_lut.blif", lib);
-    abc_wiremap(benchmark, "write_blif", benchmark + "_lut.blif", lib);
+    abc_lutpack(benchmark, "write_blif", benchmark + "_lut.blif", lib);
 
     ifstream fin(benchmark + "_lut.blif", ios::in);
     if (!fin.is_open()) {
@@ -142,23 +149,21 @@ void Circuit::lut_map(string lib) {
     do {
         if (s == ".names") {
             getline(fin, s);
-            while (s[s.length() - 1] == '\\') {
+            if (s[s.length() - 1] == '\\') {
                 string next;
                 getline(fin, next);
-                s = s.substr(0, s.length() - 1) + next;
+                s = s.substr(0, s.length() - 1) + next.substr(1);
             }
             vector<string> cells = split(s.substr(1), " ");
 
-            string out_cell = (*cells.rbegin());
-            if (find(output.begin(), output.end(), out_cell) == output.end()) {
-                graph[out_cell] = new Var(out_cell, false, false);
-            }
-            cells.pop_back();
-
             for (string cell : cells) {
-                if (find(input.begin(), input.end(), cell) == input.end()) {
+                if (graph.find(cell) == graph.end()) {
                     graph[cell] = new Var(cell, false, false);
                 }
+            }
+            string out_cell = (*cells.rbegin());
+            cells.pop_back();
+            for (string cell : cells) {
                 graph[cell]->suc.push_back(out_cell);
                 graph[out_cell]->pre.push_back(cell);
             }
