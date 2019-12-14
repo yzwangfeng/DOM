@@ -32,11 +32,13 @@ struct Match{
 	set<string> st[N];
 	string name[N];
 	queue<int> Q;
-	int h[N], mat[N], col[N], nex[N], ufs[N], fa[N], vis[N], mark[N];
+	map<string, int> id;
+	int h[N], mat[N], col[N], nex[N], ufs[N], fa[N], vis[N], mark[N], dep[N];
 	Match() {}
 	int getMatch(string dir);
 	int Find(int x);
 	int LCA(int x,int y);
+	int Getdep(int k);
 	void merge(int x,int y,int lca);
 	void augment(int x);
 	void match(int s);
@@ -142,6 +144,20 @@ void Match::match(int s)
 	}
 }
 
+int Match::Getdep(int k) {
+    int depth = 0;
+    if (dep[k] > 0)
+	return dep[k];
+//printf("%d %s\n", k, name[k].c_str());
+    for (string s : st[k]) {
+	if (id[s] == 0) continue;
+	if (id[s] == k) continue;
+	depth = max(depth, Getdep(id[s]));
+    }
+    dep[k] = depth + 1;
+    return depth + 1;
+}
+
 int Match::getMatch(string dir)
 {
 	ifstream fin(dir, ios::in);
@@ -167,22 +183,36 @@ int Match::getMatch(string dir)
             break;
         }
 
-        getline(fin, s);
-        vector<string> names = splits(s, " ");
-		++n;
-		st[n].clear();
-		for (int i = 1; i < names.size() - 1; i++) {
-			st[n].insert(names[i]);
+        string tp[10];
+        int pos = 0;
+        ++n;
+        st[n].clear();
+	vector<string> names;
+	names.clear();
+	do {
+            getline(fin, s);
+            names = splits(s, " ");
+	    for (int i = 1; i < names.size(); i++)
+		if (names[i] != "\\") {
+		    tp[pos] = names[i];
+	            pos++;
+		}
 			//cout << names[i] << endl;
 		//cout << i << endl;	
-		}
-	if (names[names.size() - 1] != "\\")
-	   name[n] = names[names.size() - 1];
-	else {
-	   fin >> name[n];
-        }
+	} while (names[names.size() -1] == "\\");
+	for (int i = 0; i < pos - 1; i++)
+	    st[n].insert(tp[i]);
+	name[n] = tp[pos - 1];
+	id[name[n]] = n;
 	//cout << n << endl;
     }
+
+    for (int i = 1; i <= n; i++)
+	if (dep[i] == 0)
+	    dep[i] = Getdep(i);
+    printf("Finish!!!\n");
+/*    for (int i = 1; i <= n; i++)
+	printf("%d\n", dep[i]);*/
     fin.close();
 	int tot = 0;
 	for (int i = 1; i < n; i++)
@@ -191,7 +221,7 @@ int Match::getMatch(string dir)
 		{
 			set<string> str = st[i];
 			str.insert(st[j].begin(), st[j].end());
-			if (str.size() > 5) continue;
+			if (str.size() > 5 || dep[i] != dep[j]) continue;
 			++tot;
 			next[tot] = h[i], u[tot] = i, v[tot] = j;
 			h[i] = tot;
