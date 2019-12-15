@@ -211,6 +211,14 @@ void Circuit::decompose(string var) {
                     break;
                 }
             }
+            for (vector<string>::iterator iter = graph[min_depth_pre[i]]->suc.begin();
+                    iter != graph[min_depth_pre[i]]->suc.end(); ++iter) {
+                if (*iter == var) {
+                    graph[min_depth_pre[i]]->suc.erase(iter);
+                    break;
+                }
+            }
+            graph[min_depth_pre[i]]->suc.push_back(dcp_var_name);
         }
         graph[var]->pre.push_back(dcp_var_name);
     }
