@@ -2,3 +2,6 @@ result
 bin
 object
 tmp.*
+.cproject
+.project
+.settings/language.settings.xml
