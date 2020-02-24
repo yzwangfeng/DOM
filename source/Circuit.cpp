@@ -34,15 +34,10 @@ Circuit::Circuit(string benchmark_)
         benchmark(benchmark_) {
     Dep = 0;
 
-    memset(abc_lut, 0, sizeof(abc_lut));
-    abc_lut_area = 0;
-
-    //standard_cell_map("2INPUT.genlib");
-
-    lut_map("6LUT.lutlib");     // change it to your own LUT library
-    for (string s : output) {
-        decompose(s);
-    }
+    lut_map("6LUT.lutlib");
+    get_abc_result();
+    cout << abc_lut_area << endl;
+    exit(2);
 
 //    for (auto p : graph) {
 //        cout << p.first << ' ' << p.second->depth << ' ';
@@ -52,13 +47,17 @@ Circuit::Circuit(string benchmark_)
 //        cout << endl;
 //    }
 
-    //write_dot();
+//    write_dot();
 }
 
 Circuit::~Circuit() {
     char lut_file[256];
-    sprintf(lut_file, "%s_lut.blif", benchmark.c_str());            // abc lut mapping file
+    sprintf(lut_file, "%s_lut.blif", benchmark.c_str());            // lut mapping file
     remove(lut_file);
+
+    char abc_lut_file[256];
+    sprintf(abc_lut_file, "%s_abc_lut.blif", benchmark.c_str());    // abc lut mapping file
+    remove(abc_lut_file);
 }
 
 void Circuit::standard_cell_map(string lib) {
@@ -109,21 +108,6 @@ void Circuit::standard_cell_map(string lib) {
 }
 
 void Circuit::lut_map(string lib) {
-    string s;
-
-    int area[10] = { }, delay[10] = { };
-    ifstream fin_lut("abclib/" + lib, ios::in);
-    if (!fin_lut.is_open()) {
-        return;
-    }
-    getline(fin_lut, s);
-    getline(fin_lut, s);
-    int k;
-    while (fin_lut >> k) {
-        fin_lut >> area[k] >> delay[k];
-    }
-    fin_lut.close();
-
     abc_lutpack(benchmark, "write_blif", benchmark + "_lut.blif", lib);
 
     ifstream fin(benchmark + "_lut.blif", ios::in);
@@ -131,6 +115,7 @@ void Circuit::lut_map(string lib) {
         return;
     }
 
+    string s;
     while (fin >> s && s != ".inputs") {
     }
     while (fin >> s && s != ".outputs") {
@@ -167,17 +152,9 @@ void Circuit::lut_map(string lib) {
                 graph[cell]->suc.push_back(out_cell);
                 graph[out_cell]->pre.push_back(cell);
             }
-            ++abc_lut[cells.size()];
         }
     } while (fin >> s && s != ".end");
     fin.close();
-
-    for (int i = 0; i < 10; ++i) {
-        abc_lut_area += abc_lut[i] * area[i];
-    }
-    cout << "ABC Area1: " << abc_lut_area << endl;
-    Match *mt = new Match();
-    cout << "ABC Area2: " << abc_lut_area - mt->getMatch(benchmark + "_lut.blif") << endl;
 }
 
 void Circuit::decompose(string var) {
@@ -226,6 +203,55 @@ void Circuit::decompose(string var) {
         graph[var]->depth = max(graph[var]->depth, graph[s]->depth);
     }
     ++graph[var]->depth;
+}
+
+void Circuit::get_abc_result() {
+    memset(abc_lut, 0, sizeof(abc_lut));
+    abc_lut_area = 0;
+
+    string s;
+
+    int area[10] = { }, delay[10] = { };
+    ifstream fin_lut("abclib/6LUT.lutlib", ios::in);
+    if (!fin_lut.is_open()) {
+        return;
+    }
+    getline(fin_lut, s);
+    getline(fin_lut, s);
+    int k;
+    while (fin_lut >> k) {
+        fin_lut >> area[k] >> delay[k];
+    }
+    fin_lut.close();
+
+    abc_lutpack(benchmark, "write_blif", benchmark + "_abc_lut.blif", "6LUT.lutlib");
+
+    ifstream fin(benchmark + "_abc_lut.blif", ios::in);
+    if (!fin.is_open()) {
+        return;
+    }
+    while (fin >> s && s != ".names") {
+    }
+    do {
+        if (s == ".names") {
+            getline(fin, s);
+            if (s[s.length() - 1] == '\\') {
+                string next;
+                getline(fin, next);
+                s = s.substr(0, s.length() - 1) + next.substr(1);
+            }
+            vector<string> cells = split(s.substr(1), " ");
+            ++abc_lut[cells.size() - 1];
+        }
+    } while (fin >> s && s != ".end");
+    fin.close();
+
+    for (int i = 0; i < 10; ++i) {
+        abc_lut_area += abc_lut[i] * area[i];
+    }
+    cout << "ABC Area1: " << abc_lut_area << endl;
+    Match *mt = new Match();
+    cout << "ABC Area2: " << abc_lut_area - mt->getMatch(benchmark + "_abc_lut.blif") << endl;
 }
 
 void Circuit::write_dot() {
