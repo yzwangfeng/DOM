@@ -348,7 +348,7 @@ int main(int argc, char *argv[]) {
 			}
             //cout << c.graph[now]->mindep << endl;
         }
-		for (string nw : Top) {
+		/*for (string nw : Top) {
 			vis.clear();
 			c.graph[nw]->Area = DFS(c, nw);
 		}
@@ -419,7 +419,7 @@ int main(int argc, char *argv[]) {
 			}
 			//printf("\n");
             c.graph[now]->Fcut = Ct[0];
-		}
+			}*/
 
 		/*counter.clear();
 
@@ -428,7 +428,7 @@ int main(int argc, char *argv[]) {
 				counter[st]++;
 				}*/
 		
-		for (string now : Top) {
+		/*for (string now : Top) {
 			vector<Cut> Ct;
 			if (c.graph[now]->pre.size() == 0) {
 				//c.graph[now]->AreaFlow = 1.0 / counter[now];
@@ -490,7 +490,7 @@ int main(int argc, char *argv[]) {
             c.graph[now]->Fcut = Ct[0];
 			for (string ss : Ct[0].names)
 				counter[ss]++;
-		}
+		}*/
 		
         pair<int, int> single = Output(c);
         pair<int, int> dual = Output2(c);
