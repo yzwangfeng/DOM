@@ -46,15 +46,15 @@ struct DoubleCut {
 struct Cut {
     set<string> names;
     string Name;
-    int mindep, Area;
+    int mindep, Area, fin;
     double AreaFlow;
     Cut() {
-	Name = "";
+	    Name = "";
         mindep = 0;
         Area = 0;
         AreaFlow = 0;
     }
-    Cut(set<string> n, string nm, int dep, int area, double AF) {
+    Cut(set<string> n, string nm, double dep, double area, double AF) {
         names = n;
 	    Name = nm;
         mindep = dep;
@@ -77,7 +77,7 @@ struct Var {
     vector<string> suc;     // successors
 
     set<set<string> > cuts[10];  //K cuts
-    set<string> Rcut;      //represent cut
+    set<string> Rcut[25];      //represent cut
     //set<string> Rdcut;
     Cut Fcut; // First Cut
     string Partner;
@@ -106,8 +106,6 @@ struct Circuit {
     void standard_cell_map(string lib);
     void lut_map(string lib);
     void decompose(string var);
-
-    void get_abc_result();
 
     void write_dot();       // visualize the circuit
 };
