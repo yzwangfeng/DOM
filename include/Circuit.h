@@ -106,7 +106,6 @@ struct Circuit {
 
     void standard_cell_map(string lib);
     void lut_map(string lib);
-    void decompose(string var);
 
     void get_abc_result();
 

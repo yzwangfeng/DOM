@@ -6,7 +6,7 @@ DIR_BIN = ./bin
 SRC = $(wildcard ${DIR_SRC}/*.cpp)  
 OBJ = $(patsubst %.cpp,${DIR_OBJ}/%.o,$(notdir ${SRC})) 
 
-TARGET = MOLM
+TARGET = DOLM
 
 BIN_TARGET = ${DIR_BIN}/${TARGET}
 

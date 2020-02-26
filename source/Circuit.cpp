@@ -34,10 +34,7 @@ Circuit::Circuit(string benchmark_)
         benchmark(benchmark_) {
     Dep = 0;
 
-    lut_map("6LUT.lutlib");
-    for (string s : output) {
-        decompose(s);
-    }
+    standard_cell_map("ALL.genlib");
 
     get_abc_result();
 
@@ -56,6 +53,10 @@ Circuit::~Circuit() {
     char lut_file[256];
     sprintf(lut_file, "%s_lut.blif", benchmark.c_str());            // lut mapping file
     remove(lut_file);
+
+    char std_file[256];
+    sprintf(std_file, "%s_standard.blif", benchmark.c_str());            // lut mapping file
+    remove(std_file);
 
     char abc_lut_file[256];
     sprintf(abc_lut_file, "%s_abc_lut.blif", benchmark.c_str());    // abc lut mapping file
@@ -157,54 +158,6 @@ void Circuit::lut_map(string lib) {
         }
     } while (fin >> s && s != ".end");
     fin.close();
-}
-
-void Circuit::decompose(string var) {
-    if (graph[var]->depth != -1) {
-        return;
-    }
-    for (string s : graph[var]->pre) {
-        decompose(s);
-    }
-    while (graph[var]->pre.size() > 2) {
-        string min_depth_pre[2] = { "-1", "-1" };
-        for (string s : graph[var]->pre) {
-            if (min_depth_pre[0] == "-1" || graph[s]->depth < graph[min_depth_pre[0]]->depth) {
-                min_depth_pre[0] = s;
-                if (min_depth_pre[1] == "-1"
-                        || graph[min_depth_pre[0]]->depth < graph[min_depth_pre[1]]->depth) {
-                    swap(min_depth_pre[0], min_depth_pre[1]);
-                }
-            }
-        }
-        string dcp_var_name = "dcp_" + to_string(graph.size());
-        graph[dcp_var_name] = new Var(dcp_var_name, false, false);
-        graph[dcp_var_name]->depth = graph[min_depth_pre[0]]->depth + 1;
-        graph[dcp_var_name]->suc.push_back(var);
-        for (int i = 0; i < 2; ++i) {
-            graph[dcp_var_name]->pre.push_back(min_depth_pre[i]);
-            for (vector<string>::iterator iter = graph[var]->pre.begin(); iter != graph[var]->pre.end();
-                    ++iter) {
-                if (*iter == min_depth_pre[i]) {
-                    graph[var]->pre.erase(iter);
-                    break;
-                }
-            }
-            for (vector<string>::iterator iter = graph[min_depth_pre[i]]->suc.begin();
-                    iter != graph[min_depth_pre[i]]->suc.end(); ++iter) {
-                if (*iter == var) {
-                    graph[min_depth_pre[i]]->suc.erase(iter);
-                    break;
-                }
-            }
-            graph[min_depth_pre[i]]->suc.push_back(dcp_var_name);
-        }
-        graph[var]->pre.push_back(dcp_var_name);
-    }
-    for (string s : graph[var]->pre) {
-        graph[var]->depth = max(graph[var]->depth, graph[s]->depth);
-    }
-    ++graph[var]->depth;
 }
 
 void Circuit::get_abc_result() {
