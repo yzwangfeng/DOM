@@ -107,6 +107,8 @@ struct Circuit {
     void lut_map(string lib);
     void decompose(string var);
 
+    void get_abc_result();
+
     void write_dot();       // visualize the circuit
 };
 

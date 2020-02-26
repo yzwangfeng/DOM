@@ -35,9 +35,11 @@ Circuit::Circuit(string benchmark_)
     Dep = 0;
 
     lut_map("6LUT.lutlib");
+    for (string s : output) {
+        decompose(s);
+    }
+
     get_abc_result();
-    cout << abc_lut_area << endl;
-    exit(2);
 
 //    for (auto p : graph) {
 //        cout << p.first << ' ' << p.second->depth << ' ';
