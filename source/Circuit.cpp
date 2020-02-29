@@ -36,7 +36,7 @@ Circuit::Circuit(string benchmark_)
 
     standard_cell_map("ALL.genlib");
 
-    get_abc_result();
+    abc_res = get_abc_result();
 
 //    for (auto p : graph) {
 //        cout << p.first << ' ' << p.second->depth << ' ';
@@ -160,7 +160,7 @@ void Circuit::lut_map(string lib) {
     fin.close();
 }
 
-void Circuit::get_abc_result() {
+pair<int, pair<int, int> > Circuit::get_abc_result() {
     memset(abc_lut, 0, sizeof(abc_lut));
     abc_lut_area = 0;
 
@@ -169,7 +169,7 @@ void Circuit::get_abc_result() {
     int area[10] = { }, delay[10] = { };
     ifstream fin_lut("abclib/6LUT.lutlib", ios::in);
     if (!fin_lut.is_open()) {
-        return;
+        return make_pair(0, make_pair(0, 0));
     }
     getline(fin_lut, s);
     getline(fin_lut, s);
@@ -183,7 +183,7 @@ void Circuit::get_abc_result() {
 
     ifstream fin(benchmark + "_abc_lut.blif", ios::in);
     if (!fin.is_open()) {
-        return;
+        return  make_pair(0, make_pair(0, 0));
     }
     while (fin >> s && s != ".names") {
     }
@@ -204,9 +204,15 @@ void Circuit::get_abc_result() {
     for (int i = 0; i < 10; ++i) {
         abc_lut_area += abc_lut[i] * area[i];
     }
-    cout << "ABC Area1: " << abc_lut_area << endl;
-    Match *mt = new Match();
-    cout << "ABC Area2: " << abc_lut_area - mt->getMatch(benchmark + "_abc_lut.blif") << endl;
+
+	Match *mt = new Match();
+	int r1 = abc_lut_area;
+	int r2 = abc_lut_area - mt->getMatch(benchmark + "_abc_lut.blif");
+	int r3 = mt->maxdep;
+    cout << "ABC Area1: " <<  r1 << endl;
+    cout << "ABC Area2: " <<  r2 << endl;
+	cout << "ABC dep" << " " <<  r3 << endl;
+	return make_pair(r1, make_pair(r2, r3));
 }
 
 void Circuit::write_dot() {
@@ -230,6 +236,7 @@ void Circuit::write_dot() {
             fout << "[shape = ellipse];" << endl;
         }
     }
+	
     fout << endl;
     for (pair<string, Var*> p : graph) {
         for (string s : p.second->pre) {

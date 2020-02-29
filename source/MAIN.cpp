@@ -263,7 +263,7 @@ int main(int argc, char *argv[]) {
     if (!fout.is_open()) {
         return 0;
     }
-    fout << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual\n";
+    fout << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual,abc_dep,abcarea_single,abcarea_dual\n";
     for (string str : benchmark) {
         cout << str << endl;
         //string str = "s38417.blif"; {
@@ -550,7 +550,7 @@ int main(int argc, char *argv[]) {
         pair<int, int> dual = Output2(c);
         fout << str.substr(0, str.find(".")) << ',' << c.input.size() << ',' << c.output.size() << ','
                 << c.graph.size() << ',' << single.first << ',' << single.second << ',' << dual.first << ','
-                << dual.second << endl;
+			 << dual.second << "," << c.abc_res.second.second << "," << c.abc_res.first << "," << c.abc_res.second.first << endl;
 
         clock_t finish = clock();
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
