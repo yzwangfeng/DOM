@@ -94,6 +94,7 @@ struct Circuit {
 
     map<string, Var*> graph;
     int Dep;
+    pair<int, pair<int, int> > abc_res;
 
     vector<string> input;
     vector<string> output;
@@ -107,7 +108,7 @@ struct Circuit {
     void standard_cell_map(string lib);
     void lut_map(string lib);
 
-    void get_abc_result();
+    pair<int, pair<int, int> > get_abc_result();
 
     void write_dot();       // visualize the circuit
 };
