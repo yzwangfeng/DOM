@@ -49,7 +49,7 @@ void abc_map(string in_file, string write_cmd, string out_file, string lib) {
     string command = "read_library abclib/" + lib + ";";
     command += "read " + in_file + ";";
     command += alias["resyn"] + alias["resyn2"];
-    command += "map -a;";  // area-only mapping
+    command += "map;";  // area-only mapping
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
 }
@@ -60,12 +60,12 @@ void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) 
     command += "read " + in_file + ";";
     command += alias["resyn"] + alias["resyn2"];
     command += "if;";
-    for (int i = 0; i < 4; ++i) {
-        command += alias["choice"] + "if;mfs;";
-    }
-    for (int i = 0; i < 2; ++i) {
-        command += "lutpack;";
-    }
+//    for (int i = 0; i < 4; ++i) {
+//        command += alias["choice"] + "if;mfs;";
+//    }
+//    for (int i = 0; i < 2; ++i) {
+//        command += "lutpack;";
+//    }
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
 }
