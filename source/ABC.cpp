@@ -52,6 +52,7 @@ void abc_map(string in_file, string write_cmd, string out_file, string lib) {
     command += "map;";  // area-only mapping
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
+    cout << "Standard cell mapping done!" << endl;
 }
 
 void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) {
@@ -68,4 +69,5 @@ void abc_lutpack(string in_file, string write_cmd, string out_file, string lib) 
 //    }
     command += write_cmd + " " + out_file + ";";
     execute_command(command);
+    cout << "LUT packing done!" << endl;
 }

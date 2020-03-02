@@ -36,6 +36,8 @@ Circuit::Circuit(string benchmark_)
 
     standard_cell_map("ALL.genlib");
 
+    cout << "PI = " << input.size() << ", PO = " << output.size() << ", size = " << graph.size() << endl;
+
     abc_res = get_abc_result();
 
 //    for (auto p : graph) {
@@ -209,9 +211,7 @@ pair<int, pair<int, int> > Circuit::get_abc_result() {
 	int r1 = abc_lut_area;
 	int r2 = abc_lut_area - mt->getMatch(benchmark + "_abc_lut.blif");
 	int r3 = mt->maxdep;
-    cout << "ABC Area1: " <<  r1 << endl;
-    cout << "ABC Area2: " <<  r2 << endl;
-	cout << "ABC dep" << " " <<  r3 << endl;
+    cout << "ABC single_area = " << r1 << ", dual_area = " <<  r2 << ", depth = " << r3 << endl;
 	return make_pair(r1, make_pair(r2, r3));
 }
 

@@ -239,7 +239,7 @@ int Match::getMatch(string dir)
 			match(i);
 	vector<string> dirs = splits(dir, "/");
     	string outdir = "result/" + dirs[1] + "/" + dirs[2] + ".out";
-	cout << outdir << endl;
+	//cout << outdir << endl;
 	FILE *out;
         out = fopen(outdir.c_str(), "w");
 	for (int i = 1; i <= n; i++)

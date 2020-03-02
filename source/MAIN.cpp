@@ -144,7 +144,7 @@ pair<int, int> Output(Circuit &c) {
         }
         fprintf(out1, "%s\n", ("\noutput:\n" + now).c_str());
     }
-    fprintf(stdout, "Area: %d\nDepth: %d\n", area, dep);
+    fprintf(stdout, "DOLM single_area = %d, single_depth = %d\n", area, dep);
     c.Dep = dep;
     return make_pair(area, dep);
 }
@@ -245,7 +245,7 @@ pair<int, int> Output2(Circuit &c) {
             }
         }
     }
-    fprintf(stdout, "Area: %d\nDepth: %d\n", area, c.Dep);
+    fprintf(stdout, "DOLM dual_area = %d, dual_depth = %d\n", area, c.Dep);
     return make_pair(area, c.Dep);
 }
 
@@ -554,7 +554,7 @@ int main(int argc, char *argv[]) {
 
         clock_t finish = clock();
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
-        cout << "Run time: " << total_time << "s" << endl;
+        cout << "Run time = " << total_time << "s" << endl;
     }
     fout.close();
     return 0;
