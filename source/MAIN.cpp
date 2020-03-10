@@ -254,7 +254,7 @@ int main(int argc, char *argv[]) {
     queue<string> Q;
     map<string, int> ind;
     unsigned int C = 10;  // record the most C Cuts
-    string benchmark_set = "EPFL";
+    string benchmark_set = "ISCAS85";
     string dir = "benchmark/" + benchmark_set;
     string outdir = "result/" + benchmark_set;
     get_file_name(dir, benchmark);
@@ -555,6 +555,7 @@ int main(int argc, char *argv[]) {
         clock_t finish = clock();
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
         cout << "Run time = " << total_time << "s" << endl;
+        cout << "--------------------------------------------------------------------------" << endl;
     }
     fout.close();
     return 0;
