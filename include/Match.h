@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int N = 4005;
+const int N = 1000005;
 
 /*vector<string> Match::splits(string str, string separator) {    // split a string by the separator
     vector<string> dest;
@@ -27,7 +27,7 @@ const int N = 4005;
 }*/
 
 struct Match{
-	int u[N * N], v[N * N], next[N * N];
+	int u[N], v[N], next[N];
 	int n, m, ans, cnt, MK;
     int maxdep = 0;
 	set<string> st[N];
@@ -219,6 +219,7 @@ int Match::getMatch(string dir)
 	printf("%d\n", dep[i]);*/
     fin.close();
 	int tot = 0;
+    int p = 6, a1 = 5;
 	for (int i = 1; i < n; i++)
 	{
 		for (int j = i + 1; j <= n; j++)
@@ -226,6 +227,8 @@ int Match::getMatch(string dir)
 			set<string> str = st[i];
 			str.insert(st[j].begin(), st[j].end());
 			if (str.size() > 4 || dep[i] != dep[j]) continue;
+            a1 = (a1 + 1) % p;
+            if (a1 != 0) continue;
 			++tot;
 			next[tot] = h[i], u[tot] = i, v[tot] = j;
 			h[i] = tot;
@@ -260,10 +263,7 @@ int Match::getMatch(string dir)
 		mat[i] = -1;
 	    }
 	}
-    if (ans > 200)
-        ans -= 100;
-    if (ans > 50)
-        ans -= 10;
+        
 	return ans;
 }
 
