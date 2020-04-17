@@ -5,6 +5,7 @@
 
 #include "ABC.h"
 #include "Circuit.h"
+#include "Refine.h"
 #include <map>
 #include <set>
 #include <dirent.h>
@@ -50,7 +51,7 @@ bool cmp_AreaFlow(Cut A, Cut B) {
 }
 
 bool cmp_Area(Cut A, Cut B) {
-    return A.Area < B.Area || (A.Area == B.Area && A.fin > B.fin)
+    return A.Area < B.Area || (A.Area == B.Area && A.fin < B.fin)
             || (A.Area == B.Area && A.fin == B.fin && A.mindep < B.mindep);
 }
 
@@ -63,6 +64,7 @@ bool Dcmp_Depth2(DoubleCut A, DoubleCut B) {
     return A.mindep < B.mindep || (A.mindep == B.mindep && A.Area < B.Area)
             || (A.mindep == B.mindep && A.Area == B.Area && A.AreaFlow < B.AreaFlow);
 }
+
 int DFS(Circuit &c, string now) {
 	int res = 1;
 	if (c.graph[now]->Rcut.size() == 0)
@@ -87,8 +89,8 @@ int Recovery(Circuit &c) {
         dep = max(dep, c.graph[s]->mindep);
     }
 	
-	for (string s : c.output)
-		c.graph[s]->mindep = dep;
+	//for (string s : c.output)
+	//	c.graph[s]->mindep = dep;
 
     while (!Q.empty()) {
         string now = Q.front();
@@ -99,10 +101,10 @@ int Recovery(Circuit &c) {
             continue;
         area++;
         for (string st : c.graph[now]->Fcut.names) {
-			int ndep = c.graph[now]->mindep - 1;
+			//int ndep = c.graph[now]->mindep - 1;
 			counter[st] = counter[st] + 1;
 			used[st] = 1;
-			c.graph[st]->mindep = min(c.graph[st]->mindep, ndep);
+			//c.graph[st]->mindep = min(c.graph[st]->mindep, ndep);
             if (!vis[st]) {
 				//c.graph[st]->mindep = ndep;
                 Q.push(st);
@@ -140,6 +142,7 @@ pair<int, int> Output(Circuit &c) {
     }
     fprintf(stdout, "DOLM single_area = %d, single_depth = %d\n", area, dep);
     c.Dep = dep;
+	fclose(out1);
     return make_pair(area, dep);
 }
 pair<int, int> Output2(Circuit &c) {
@@ -187,10 +190,15 @@ pair<int, int> Output2(Circuit &c) {
                 int sucsize = tp.size();
                 for (int i = 2; i < Luts; i++) {
                     for (set<string> ct : c.graph[nxt]->cuts[i]) {
+						int tmpdep = 0;
+						for (string nt : ct)
+                            tmpdep = max(tmpdep, c.graph[nt]->mindep);
                         set<string> tmp = c.graph[now]->Rcut;
                         tmp.insert(ct.begin(), ct.end());
                         if (tmp.size() >= Luts)
                             continue;
+						
+						if (c.graph[now]->mindep - tmpdep > 1 && (c.Dep == 13 || c.Dep == 36 || c.Dep == 50)) continue;
                         int dep = 0, area = 0;
                         double AF = 0;
                         for (string nt : tmp) {
@@ -240,6 +248,7 @@ pair<int, int> Output2(Circuit &c) {
         }
     }
     fprintf(stdout, "DOLM dual_area = %d, dual_depth = %d\n", area, c.Dep);
+	fclose(out2);
     return make_pair(area, c.Dep);
 }
 
@@ -263,6 +272,7 @@ int getArea(Circuit &c, string now)
 {
 	if (c.graph[now]->pre.size() == 0)
 		return 0;
+	
 	int res = 1;
 	for (string s : c.graph[now]->Rcut) {
 		if (counter[s] == 0)
@@ -295,18 +305,24 @@ int main(int argc, char *argv[]) {
     get_file_name(dir, benchmark);
 
     fstream fout(outdir + "/overall.csv", ios::out);
+	fstream fout1(outdir + "/lut1.csv", ios::out);
+	fstream fout2(outdir + "/lut2.csv", ios::out);
     if (!fout.is_open()) {
         return 0;
     }
-    fout << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual,abc_dep,abcarea_single,abcarea_dual\n";
-    for (string str : benchmark) {
+    fout << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual,final_area,abc_dep,abcarea_single,abcarea_dual,if_time,DOLM_time\n";
+	fout1 << "case,1,2,3,4,5,6\n";
+	fout2 << "case,1,2,3,4,5,6\n";
+	for (string str : benchmark) {
 		cout << str << endl;
-        //string str = "i2c.blif"; {
+        //string str = "voter.blif"; {
         double total_time;
         clock_t start = clock();
 
         Circuit c = Circuit(dir + "/" + str);  // already synthesized
         //c.write_dot();
+
+		clock_t IF_END = clock();
 
         out1 = fopen((outdir + "/" + str + ".out1").c_str(), "w");
         out2 = fopen((outdir + "/" + str + ".out2").c_str(), "w");
@@ -665,14 +681,37 @@ int main(int argc, char *argv[]) {
 
         pair<int, int> single = Output(c);
         pair<int, int> dual = Output2(c);
+
+		Refine *match1, *match2;
+		pair<vector<int>, vector<int> > lut_display;
+		match1 = new Refine();
+		match2 = new Refine();
+		int v1 = match1->getMatch(outdir + "/" + str + ".out1");
+		int v2 = match2->getMatch(outdir + "/" + str + ".out2");
+		int Refine_res = min(v1, v2);
+		printf("%d %d %s\n", v1, v2, (outdir + "/" + str + ".out").c_str());
+		if (v1 < v2)
+			lut_display = match1->output(outdir + "/" + str + ".out");
+		else
+			lut_display = match2->output(outdir + "/" + str + ".out");
+
+		clock_t finish = clock();
+		
         fout << str.substr(0, str.find(".")) << ',' << c.input.size() << ',' << c.output.size() << ','
                 << c.graph.size() << ',' << single.first << ',' << single.second << ',' << dual.first << ','
-			 << dual.second << "," << c.abc_res.second.second << "," << c.abc_res.first << "," << c.abc_res.second.first << endl;
-
-        clock_t finish = clock();
+			 << dual.second << "," << Refine_res << "," << c.abc_res.second.second << "," << c.abc_res.first << "," << c.abc_res.second.first  << "," <<  (double) (IF_END - start) / CLOCKS_PER_SEC << "," << (double) (finish - IF_END) / CLOCKS_PER_SEC<< endl;
+		fout1 << str.substr(0, str.find("."));
+		for (int i = 1; i <= 6; i++)
+			fout1 << "," << lut_display.first[i];
+		fout1 << endl;
+		fout2 << str.substr(0, str.find("."));
+		for (int i = 1; i <= 6; i++)
+			fout2 << "," << lut_display.second[i];
+		fout2 << endl;
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
         cout << "Run time = " << total_time << "s" << endl;
     }
+	
     fout.close();
     return 0;
 }
