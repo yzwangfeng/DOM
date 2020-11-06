@@ -23,8 +23,8 @@
 #define INF 100000000
 
 struct DoubleCut {
-    set<string> names;
-    string Name1, Name2;
+    set<string> names;      // inputs
+    string Name1, Name2;    // outputs
     int mindep, Area;
     double AreaFlow;
     DoubleCut() {
@@ -42,29 +42,28 @@ struct DoubleCut {
     }
 };
 
-
 struct Cut {
     set<string> names;
     string Name;
     int mindep, Area, fin;
     double AreaFlow;
     Cut() {
-	    Name = "";
+        Name = "";
         mindep = 0;
         Area = 0;
         AreaFlow = 0;
     }
     Cut(set<string> n, string nm, double dep, double area, double f, double AF) {
         names = n;
-	    Name = nm;
+        Name = nm;
         mindep = dep;
         Area = area;
         fin = f;
         AreaFlow = AF;
     }
-    bool operator < (const Cut A) const{
-        return mindep > A.mindep || (mindep == A.mindep && Area < A.Area) 
-               || (mindep == A.mindep && Area == A.Area && AreaFlow < A.AreaFlow);
+    bool operator <(const Cut A) const {
+        return mindep > A.mindep || (mindep == A.mindep && Area < A.Area)
+                || (mindep == A.mindep && Area == A.Area && AreaFlow < A.AreaFlow);
     }
 };
 
@@ -77,11 +76,11 @@ struct Var {
     vector<string> pre;     // precursors
     vector<string> suc;     // successors
 
-    set<set<string> > cuts[10];  //K cuts
+    set<set<string> > cuts[10];  //K cuts, set<string> is a cut, cut[i] is the number of cuts with i inputs
     set<string> Rcut;      //represent cut
     //set<string> Rdcut;
-    Cut Fcut; // First Cut
-    string Partner;
+    Cut Fcut;           // First Cut (= Rcut), the best cut in the priority cut set
+    string Partner;     // the other output in the dual-output cut
 
     int mindep, Area, fin;
     double AreaFlow;

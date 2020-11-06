@@ -1,3 +1,7 @@
+/*
+ * blossom algorithm
+ */
+
 #include "Circuit.h"
 
 #define mem(x) memset(x, 0, sizeof(x))

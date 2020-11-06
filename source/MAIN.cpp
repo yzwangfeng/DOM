@@ -23,10 +23,10 @@ using namespace std;
 FILE *out1, *out2;
 int Luts = 6, Dep = 0;
 vector<string> Top;
-map<string, int> counter;
+map<string, int> counter;   // fanin ref (= fanout)
 map<string, int> used;
 map<string, int> vis;
-map<string, int> mark;
+map<string, int> mark;      // only used in DFS
 
 void get_file_name(string path, vector<string> &files) {
     struct dirent *ptr;
@@ -38,7 +38,6 @@ void get_file_name(string path, vector<string> &files) {
     }
     closedir(dir);
 }
-
 
 bool cmp_Depth(Cut A, Cut B) {
     return A.mindep < B.mindep || (A.mindep == B.mindep && A.Area < B.Area)
@@ -65,55 +64,55 @@ bool Dcmp_Depth2(DoubleCut A, DoubleCut B) {
             || (A.mindep == B.mindep && A.Area == B.Area && A.AreaFlow < B.AreaFlow);
 }
 
-int DFS(Circuit &c, string now) {
-	int res = 1;
-	if (c.graph[now]->Rcut.size() == 0)
-		return 1;
-	mark[now] = 1;
-	for (string s : c.graph[now]->Rcut) {
-		if (counter[s] == 1 && mark[s] == 0)
-			res += DFS(c, s);
-	}
-	return res;
+int DFS(Circuit &c, string now) {       // compute |MFFC(now)| by DFS
+    int res = 1;
+    if (c.graph[now]->Rcut.size() == 0)
+        return 1;
+    mark[now] = 1;
+    for (string s : c.graph[now]->Rcut) {
+        if (counter[s] == 1 && mark[s] == 0)
+            res += DFS(c, s);
+    }
+    return res;
 }
-int Recovery(Circuit &c) {
-	queue<string> Q;
-	vis.clear();
-	used.clear();
-	counter.clear();
+int Recovery(Circuit &c) {      // re-compute heuristic functions after an iteration
+    queue<string> Q;
+    vis.clear();
+    used.clear();
+    counter.clear();
     int area = 0, dep = 0;
     for (string s : c.output) {
         Q.push(s);
         vis[s] = 1;
-		used[s] = 1;
+        used[s] = 1;
         dep = max(dep, c.graph[s]->mindep);
     }
-	
-	//for (string s : c.output)
-	//	c.graph[s]->mindep = dep;
+
+    //for (string s : c.output)
+    //	c.graph[s]->mindep = dep;
 
     while (!Q.empty()) {
         string now = Q.front();
         Q.pop();
-		//c.graph[now]->fin = counter[now];
-		c.graph[now]->fin = (1.0 * c.graph[now]->fin + 2 * counter[now]) / 3;
+        //c.graph[now]->fin = counter[now];
+        c.graph[now]->fin = (1.0 * c.graph[now]->fin + 2 * counter[now]) / 3;   // fanin refs used in abc
         if (c.graph[now]->pre.size() == 0)
             continue;
         area++;
         for (string st : c.graph[now]->Fcut.names) {
-			//int ndep = c.graph[now]->mindep - 1;
-			counter[st] = counter[st] + 1;
-			used[st] = 1;
-			//c.graph[st]->mindep = min(c.graph[st]->mindep, ndep);
+            //int ndep = c.graph[now]->mindep - 1;
+            counter[st] = counter[st] + 1;
+            used[st] = 1;
+            //c.graph[st]->mindep = min(c.graph[st]->mindep, ndep);
             if (!vis[st]) {
-				//c.graph[st]->mindep = ndep;
+                //c.graph[st]->mindep = ndep;
                 Q.push(st);
                 vis[st] = 1;
             }
         }
     }
-	printf("%d %d\n", area, dep);
-	return area;
+    printf("%d %d\n", area, dep);
+    return area;
 }
 pair<int, int> Output(Circuit &c) {
     queue<string> Q;
@@ -142,7 +141,7 @@ pair<int, int> Output(Circuit &c) {
     }
     fprintf(stdout, "DOLM single_area = %d, single_depth = %d\n", area, dep);
     c.Dep = dep;
-	fclose(out1);
+    fclose(out1);
     return make_pair(area, dep);
 }
 pair<int, int> Output2(Circuit &c) {
@@ -190,15 +189,13 @@ pair<int, int> Output2(Circuit &c) {
                 int sucsize = tp.size();
                 for (int i = 2; i < Luts; i++) {
                     for (set<string> ct : c.graph[nxt]->cuts[i]) {
-						int tmpdep = 0;
-						for (string nt : ct)
+                        int tmpdep = 0;
+                        for (string nt : ct)
                             tmpdep = max(tmpdep, c.graph[nt]->mindep);
                         set<string> tmp = c.graph[now]->Rcut;
                         tmp.insert(ct.begin(), ct.end());
                         if (tmp.size() >= Luts)
                             continue;
-						
-						if (c.graph[now]->mindep - tmpdep > 1 && (c.Dep == 13 || c.Dep == 36 || c.Dep == 50)) continue;
                         int dep = 0, area = 0;
                         double AF = 0;
                         for (string nt : tmp) {
@@ -248,55 +245,52 @@ pair<int, int> Output2(Circuit &c) {
         }
     }
     fprintf(stdout, "DOLM dual_area = %d, dual_depth = %d\n", area, c.Dep);
-	fclose(out2);
+    fclose(out2);
     return make_pair(area, c.Dep);
 }
 
-void Dereferrence(Circuit& c, string now, int& mem)
-{
-	if (c.graph[now]->pre.size() == 0)
-		return;
-	mem++;
-	for (string s : c.graph[now]->Rcut) {
-		if (counter[s] > 0) {
-			counter[s] = counter[s] - 1;
-			if (counter[s] == 0) {
-				used[s] = 0;
-				Dereferrence(c, s, mem);
-			}
-		}
-	}
+void Dereference(Circuit &c, string now, int &mem) {   // update fanin refs according to the best cuts in this iteration
+    if (c.graph[now]->pre.size() == 0)
+        return;
+    mem++;
+    for (string s : c.graph[now]->Rcut) {
+        if (counter[s] > 0) {
+            counter[s] = counter[s] - 1;
+            if (counter[s] == 0) {
+                used[s] = 0;
+                Dereference(c, s, mem);
+            }
+        }
+    }
 }
 
-int getArea(Circuit &c, string now)
-{
-	if (c.graph[now]->pre.size() == 0)
-		return 0;
-	
-	int res = 1;
-	for (string s : c.graph[now]->Rcut) {
-		if (counter[s] == 0)
-			res += getArea(c, s);
-	}
-	return res;
+int getArea(Circuit &c, string now) {
+    if (c.graph[now]->pre.size() == 0)
+        return 0;
+
+    int res = 1;
+    for (string s : c.graph[now]->Rcut) {
+        if (counter[s] == 0)
+            res += getArea(c, s);
+    }
+    return res;
 }
 
-void referrence(Circuit& c, string now)
-{
-	if (c.graph[now]->pre.size() == 0)
-		return;
-	vis[now] = 1;
-	for (string s : c.graph[now]->Rcut) {
-		used[s] = 1;
-		counter[s]++;
-		if (vis[s] == 0)
-			referrence(c, s);
-	}
+void reference(Circuit &c, string now) {       // opposite to dereference
+    if (c.graph[now]->pre.size() == 0)
+        return;
+    vis[now] = 1;
+    for (string s : c.graph[now]->Rcut) {
+        used[s] = 1;
+        counter[s]++;
+        if (vis[s] == 0)
+            reference(c, s);
+    }
 }
 
 int main(int argc, char *argv[]) {
     vector<string> benchmark;
-    queue<string> Q;
+    queue<string> Q;    // for topological sort
     map<string, int> ind;
     unsigned int C = 20;   // record the most C Cuts
     string benchmark_set = "EPFL";
@@ -305,35 +299,36 @@ int main(int argc, char *argv[]) {
     get_file_name(dir, benchmark);
 
     fstream fout(outdir + "/overall.csv", ios::out);
-	fstream fout1(outdir + "/lut1.csv", ios::out);
-	fstream fout2(outdir + "/lut2.csv", ios::out);
+    fstream fout1(outdir + "/lut1.csv", ios::out);
+    fstream fout2(outdir + "/lut2.csv", ios::out);
     if (!fout.is_open()) {
         return 0;
     }
-    fout << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual,final_area,abc_dep,abcarea_single,abcarea_dual,if_time,DOLM_time\n";
-	fout1 << "case,1,2,3,4,5,6\n";
-	fout2 << "case,1,2,3,4,5,6\n";
-	for (string str : benchmark) {
-		cout << str << endl;
+    fout
+            << "case,PI,PO,size,area_single,depth_single,area_dual,depth_dual,final_area,abc_dep,abcarea_single,abcarea_dual,if_time,DOLM_time\n";
+    fout1 << "case,1,2,3,4,5,6\n";
+    fout2 << "case,1,2,3,4,5,6\n";
+    for (string str : benchmark) {
+        cout << str << endl;
         //string str = "voter.blif"; {
         double total_time;
         clock_t start = clock();
 
-        Circuit c = Circuit(dir + "/" + str);  // already synthesized
+        Circuit c = Circuit(dir + "/" + str);  // invoke abc, already synthesized
         //c.write_dot();
 
-		clock_t IF_END = clock();
+        clock_t IF_END = clock();
 
         out1 = fopen((outdir + "/" + str + ".out1").c_str(), "w");
         out2 = fopen((outdir + "/" + str + ".out2").c_str(), "w");
 
-        Top.clear();
-		counter.clear();
+        Top.clear();        // store the topological order
+        counter.clear();
 
         for (pair<string, Var*> p : c.graph) {
             ind[p.first] = p.second->pre.size();
             p.second->mindep = 0;
-			p.second->Rcut.clear();
+            p.second->Rcut.clear();
             //			p.second->Rdcut.clear();
         }
 
@@ -342,46 +337,46 @@ int main(int argc, char *argv[]) {
             c.graph[s]->mindep = 0;
             c.graph[s]->Area = 0;
             c.graph[s]->AreaFlow = 0;
-			c.graph[s]->fin = 0;
-			c.graph[s]->Rcut = set<string> { s };
+            c.graph[s]->fin = 0;
+            c.graph[s]->Rcut = set<string> { s };
             c.graph[s]->Fcut = Cut(set<string> { s }, s, 0, 0, 0, 0);
-			Top.push_back(s);
+            Top.push_back(s);
             for (string nt : c.graph[s]->suc) {
-                ind[nt]--;
+                ind[nt]--;      // in degree
                 if (ind[nt] == 0)
                     Q.push(nt);
             }
         }
 
-        //Enumerate Cuts
+        //Enumerate Priority Cuts
         while (!Q.empty()) {
             string now = Q.front();
             //cout << now << endl;
-			Top.push_back(now);
+            Top.push_back(now); // Top = Q
             Q.pop();
-            c.graph[now]->cuts[1].insert(set<string> { now });
+            c.graph[now]->cuts[1].insert(set<string> { now });  // the trivial cut
             assert(c.graph[now]->pre.size() <= 2);
-            if (c.graph[now]->pre.size() == 2) {
+            if (c.graph[now]->pre.size() == 2) {        // merge cuts of its two children
                 string input1 = c.graph[now]->pre[0];
                 string input2 = c.graph[now]->pre[1];
-				c.graph[input1]->fin++;
-				c.graph[input2]->fin++;
+                c.graph[input1]->fin++;
+                c.graph[input2]->fin++;
                 for (int t = 1; t <= Luts; t++)
                     for (set<string> c1 : c.graph[input1]->cuts[t]) {
                         for (int k = 1; k <= Luts; k++)
                             for (set<string> c2 : c.graph[input2]->cuts[k]) {
                                 set<string> st = c1;
                                 st.insert(c2.begin(), c2.end());
-                                if (st.size() > (unsigned) Luts)
+                                if (st.size() > (unsigned) Luts)    // constraint
                                     continue;
                                 c.graph[now]->cuts[st.size()].insert(st);
                             }
                     }
             }
 
-            if (c.graph[now]->pre.size() == 1) {
+            if (c.graph[now]->pre.size() == 1) {    // inherit cuts from its child
                 string input1 = c.graph[now]->pre[0];
-				c.graph[input1]->fin++;
+                c.graph[input1]->fin++;
                 for (int k = 1; k <= Luts; k++)
                     for (set<string> c1 : c.graph[input1]->cuts[k])
                         c.graph[now]->cuts[k].insert(c1);
@@ -398,28 +393,9 @@ int main(int argc, char *argv[]) {
             c.graph[now]->mindep = INF;
             c.graph[now]->Area = INF;
             c.graph[now]->AreaFlow = inf;
-			c.graph[now]->fin = 0;
+            c.graph[now]->fin = 0;
             for (int k = 1; k <= Luts; k++) {
                 for (set<string> ct : c.graph[now]->cuts[k]) {
-					/*int check_subset = 0;
-					for (int j = 1; j < k; j++) {
-						int ok = 0;
-						for (set<string> cts : c.graph[now]->cuts[j]) {
-							ok = 0;
-							for (string sts : cts) {
-								if (ct.count(sts) == 0) {
-									ok = 1;
-									break;
-								}
-							}
-							if (!ok) {
-								check_subset = 1;
-								break;
-							}
-						}
-						if (!ok) break;
-					}
-					if (check_subset) continue;*/
                     int dep = 0, area = 0;
                     double AF = 0;
                     for (string nt : ct) {
@@ -439,7 +415,7 @@ int main(int argc, char *argv[]) {
                 c.graph[now]->cuts[k].clear();
                 unsigned int len = Cuts[k].size();
                 //cout << "now:" << now << endl;
-                for (unsigned int i = 0; i < min(C, len); i++) {
+                for (unsigned int i = 0; i < min(C, len); i++) {        // store C priority cuts for each input
                     c.graph[now]->cuts[k].insert(Cuts[k][i].names);
                     //cout << Cuts[i].mindep << endl;
                 }
@@ -451,267 +427,235 @@ int main(int argc, char *argv[]) {
             c.graph[now]->mindep = Ct[0].mindep;
             c.graph[now]->AreaFlow = Ct[0].AreaFlow;
             c.graph[now]->Area = Ct[0].Area;
-			unsigned int Ctmp = Ct.size();
-			c.graph[now]->Rcut = Ct[0].names;
+            unsigned int Ctmp = Ct.size();
+            c.graph[now]->Rcut = Ct[0].names;
             c.graph[now]->Fcut = Ct[0];
         }
 
-		for (int lastarea = (1 << 30) ; ; ) {
-			int tmper = Recovery(c);
-			if (tmper == lastarea) break;
-			lastarea = tmper;
-			for (string now : Top) {
-				//cout << now << " " << c.graph[now]->AreaFlow << " "  << c.graph[now]->Area << endl;
-				if (c.graph[now]->pre.size() == 0)
-					continue;
-				for (int i = 0; i <= Luts; i++)
-					c.graph[now]->cuts[i].clear();
-			}
-		
-			for (string now : Top) {
-				if (c.graph[now]->pre.size() == 0)
-					continue;
-				//c.graph[now]->cuts[1].insert(set<string> { now });
-				assert(c.graph[now]->pre.size() <= 2);
-				if (c.graph[now]->pre.size() == 2) {
-					string input1 = c.graph[now]->pre[0];
-					string input2 = c.graph[now]->pre[1];
-					for (int t = 1; t <= Luts; t++)
-						for (set<string> c1 : c.graph[input1]->cuts[t]) {
-							for (int k = 1; k <= Luts; k++)
-								for (set<string> c2 : c.graph[input2]->cuts[k]) {
-									set<string> st = c1;
-									st.insert(c2.begin(), c2.end());
-									if (st.size() > (unsigned) Luts)
-										continue;
-									c.graph[now]->cuts[st.size()].insert(st);
-								}
-						}
-				}
+        for (int lastarea = (1 << 30);;) {  // a large number, iterate until convergence
+            int tmper = Recovery(c);
+            if (tmper == lastarea)
+                break;
+            lastarea = tmper;
+            for (string now : Top) {
+                //cout << now << " " << c.graph[now]->AreaFlow << " "  << c.graph[now]->Area << endl;
+                if (c.graph[now]->pre.size() == 0)
+                    continue;
+                for (int i = 0; i <= Luts; i++)
+                    c.graph[now]->cuts[i].clear();
+            }
 
-				if (c.graph[now]->pre.size() == 1) {
-					string input1 = c.graph[now]->pre[0];
-					for (int k = 1; k <= Luts; k++)
-						for (set<string> c1 : c.graph[input1]->cuts[k])
-							c.graph[now]->cuts[k].insert(c1);
-				}
+            for (string now : Top) {
+                if (c.graph[now]->pre.size() == 0)
+                    continue;
+                //c.graph[now]->cuts[1].insert(set<string> { now });
+                assert(c.graph[now]->pre.size() <= 2);
+                if (c.graph[now]->pre.size() == 2) {
+                    string input1 = c.graph[now]->pre[0];
+                    string input2 = c.graph[now]->pre[1];
+                    for (int t = 1; t <= Luts; t++)
+                        for (set<string> c1 : c.graph[input1]->cuts[t]) {
+                            for (int k = 1; k <= Luts; k++)
+                                for (set<string> c2 : c.graph[input2]->cuts[k]) {
+                                    set<string> st = c1;
+                                    st.insert(c2.begin(), c2.end());
+                                    if (st.size() > (unsigned) Luts)
+                                        continue;
+                                    c.graph[now]->cuts[st.size()].insert(st);
+                                }
+                        }
+                }
 
-				set<string> Rcut_mem = c.graph[now]->Rcut;
-				int Area_mem = 0;
-			
-				if (used[now])
-					Dereferrence(c, now, Area_mem);
+                if (c.graph[now]->pre.size() == 1) {
+                    string input1 = c.graph[now]->pre[0];
+                    for (int k = 1; k <= Luts; k++)
+                        for (set<string> c1 : c.graph[input1]->cuts[k])
+                            c.graph[now]->cuts[k].insert(c1);
+                }
 
-				/*Calculate dep, areaflow, exact area*/
-				vector<Cut> Cuts[10], Ct;
-				for (int k = 1; k <= Luts; k++) {
-					for (set<string> ct : c.graph[now]->cuts[k]) {
-						/*int check_subset = 0;
-						for (int j = 1; j < k; j++) {
-							int ok = 0;
-							for (set<string> cts : c.graph[now]->cuts[j]) {
-								ok = 0;
-								for (string sts : cts) {
-									if (ct.count(sts) == 0) {
-										ok = 1;
-										break;
-									}
-								}
-								if (!ok) {
-									check_subset = 1;
-									break;
-								}
-							}
-							if (!ok) break;
-						}
-						if (check_subset) continue;*/
-						int dep = 0, area = 0, fin = 0;
-						double AF = 0;
-						for (string nt : ct) {
-							dep = max(dep, c.graph[nt]->mindep);
-							AF += c.graph[nt]->AreaFlow;
-							fin += counter[nt];
-						}
-						dep++;
-						if (dep > c.graph[now]->mindep) continue;
-						c.graph[now]->Rcut = ct;
-						area = getArea(c, now);
-						AF = (AF + area) / max(1.0, 1.0 * fin);
-						//printf("%d\n", area);
-						Cuts[k].push_back(Cut(ct, now, dep, area, fin, AF));
-						Ct.push_back(Cut(ct, now, dep, area, fin, AF));
-					}
-				}
-				for (int k = 1; k <= Luts; k++) {
-					sort(Cuts[k].begin(), Cuts[k].end(), cmp_AreaFlow);
-					c.graph[now]->cuts[k].clear();
-					unsigned int len = Cuts[k].size();
-					//cout << "now:" << now << endl;
-					for (unsigned int i = 0; i < min(C, len); i++) {
-						c.graph[now]->cuts[k].insert(Cuts[k][i].names);
-						//cout << Cuts[i].mindep << endl;
-					}
-				}
-				//if (c.graph[now]->pre.size() != 1)
-				c.graph[now]->cuts[1].insert(set<string> { now });
-				sort(Ct.begin(), Ct.end(), cmp_AreaFlow);
-				if (Ct.size() == 0 || Ct[0].Area > Area_mem)
-					c.graph[now]->Rcut = Rcut_mem;
-				else {
-					c.graph[now]->AreaFlow = Ct[0].AreaFlow;
-					c.graph[now]->mindep = Ct[0].mindep;
-					unsigned int Ctmp = Ct.size();
-					c.graph[now]->Rcut = Ct[0].names;
-					c.graph[now]->Fcut = Ct[0];
-				}
-				vis.clear();
-				if (used[now])
-					referrence(c, now);
-			}
+                set<string> Rcut_mem = c.graph[now]->Rcut;
+                int Area_mem = 0;
 
-			Recovery(c);
+                if (used[now])
+                    Dereference(c, now, Area_mem);
 
-			for (string now : Top) {
-				if (c.graph[now]->pre.size() == 0)
-					continue;
-				for (int i = 0; i <= Luts; i++)
-					c.graph[now]->cuts[i].clear();
-			}
-		
-			for (string now : Top) {
-				if (c.graph[now]->pre.size() == 0)
-					continue;
-				//c.graph[now]->cuts[1].insert(set<string> { now });
-				assert(c.graph[now]->pre.size() <= 2);
-				if (c.graph[now]->pre.size() == 2) {
-					string input1 = c.graph[now]->pre[0];
-					string input2 = c.graph[now]->pre[1];
-					for (int t = 1; t <= Luts; t++)
-						for (set<string> c1 : c.graph[input1]->cuts[t]) {
-							for (int k = 1; k <= Luts; k++)
-								for (set<string> c2 : c.graph[input2]->cuts[k]) {
-									set<string> st = c1;
-									st.insert(c2.begin(), c2.end());
-									if (st.size() > (unsigned) Luts)
-										continue;
-									c.graph[now]->cuts[st.size()].insert(st);
-								}
-						}
-				}
+                /*Calculate dep, areaflow, exact area*/
+                vector<Cut> Cuts[10], Ct;
+                for (int k = 1; k <= Luts; k++) {
+                    for (set<string> ct : c.graph[now]->cuts[k]) {
+                        int dep = 0, area = 0, fin = 0;
+                        double AF = 0;
+                        for (string nt : ct) {
+                            dep = max(dep, c.graph[nt]->mindep);
+                            AF += c.graph[nt]->AreaFlow;
+                            fin += counter[nt];
+                        }
+                        dep++;
+                        if (dep > c.graph[now]->mindep)
+                            continue;
+                        c.graph[now]->Rcut = ct;
+                        area = getArea(c, now);
+                        AF = (AF + area) / max(1.0, 1.0 * fin);
+                        //printf("%d\n", area);
+                        Cuts[k].push_back(Cut(ct, now, dep, area, fin, AF));
+                        Ct.push_back(Cut(ct, now, dep, area, fin, AF));
+                    }
+                }
+                for (int k = 1; k <= Luts; k++) {
+                    sort(Cuts[k].begin(), Cuts[k].end(), cmp_AreaFlow);
+                    c.graph[now]->cuts[k].clear();
+                    unsigned int len = Cuts[k].size();
+                    //cout << "now:" << now << endl;
+                    for (unsigned int i = 0; i < min(C, len); i++) {
+                        c.graph[now]->cuts[k].insert(Cuts[k][i].names);
+                        //cout << Cuts[i].mindep << endl;
+                    }
+                }
+                //if (c.graph[now]->pre.size() != 1)
+                c.graph[now]->cuts[1].insert(set<string> { now });
+                sort(Ct.begin(), Ct.end(), cmp_AreaFlow);
+                if (Ct.size() == 0 || Ct[0].Area > Area_mem)
+                    c.graph[now]->Rcut = Rcut_mem;
+                else {
+                    c.graph[now]->AreaFlow = Ct[0].AreaFlow;
+                    c.graph[now]->mindep = Ct[0].mindep;
+                    unsigned int Ctmp = Ct.size();
+                    c.graph[now]->Rcut = Ct[0].names;
+                    c.graph[now]->Fcut = Ct[0];
+                }
+                vis.clear();
+                if (used[now])
+                    reference(c, now);
+            }
 
-				if (c.graph[now]->pre.size() == 1) {
-					string input1 = c.graph[now]->pre[0];
-					for (int k = 1; k <= Luts; k++)
-						for (set<string> c1 : c.graph[input1]->cuts[k])
-							c.graph[now]->cuts[k].insert(c1);
-				}
+            Recovery(c);
 
-				set<string> Rcut_mem = c.graph[now]->Rcut;
-				int Area_mem = 0;
-			
-				if (used[now])
-					Dereferrence(c, now, Area_mem);
+            for (string now : Top) {
+                if (c.graph[now]->pre.size() == 0)
+                    continue;
+                for (int i = 0; i <= Luts; i++)
+                    c.graph[now]->cuts[i].clear();
+            }
 
-				/*Calculate dep, areaflow, exact area*/
-				vector<Cut> Cuts[10], Ct;
-				for (int k = 1; k <= Luts; k++) {
-					for (set<string> ct : c.graph[now]->cuts[k]) {
-						/*int check_subset = 0;
-						for (int j = 1; j < k; j++) {
-							int ok = 0;
-							for (set<string> cts : c.graph[now]->cuts[j]) {
-								ok = 0;
-								for (string sts : cts) {
-									if (ct.count(sts) == 0) {
-										ok = 1;
-										break;
-									}
-								}
-								if (!ok) {
-									check_subset = 1;
-									break;
-								}
-							}
-							if (!ok) break;
-						}
-						if (check_subset) continue;*/
-						int dep = 0, area = 0, fin = 0;
-						double AF = c.graph[now]->Area;
-						for (string nt : ct) {
-							dep = max(dep, c.graph[nt]->mindep);
-							fin += counter[nt];
-						}
-						dep++;
-						if (dep > c.graph[now]->mindep) continue;
-						c.graph[now]->Rcut = ct;
-						area = getArea(c, now);
-						//printf("%d\n", area);
-						Cuts[k].push_back(Cut(ct, now, dep, area, fin, AF));
-						Ct.push_back(Cut(ct, now, dep, area, fin, AF));
-					}
-				}
-				for (int k = 1; k <= Luts; k++) {
-					sort(Cuts[k].begin(), Cuts[k].end(), cmp_Area);
-					c.graph[now]->cuts[k].clear();
-					unsigned int len = Cuts[k].size();
-					//cout << "now:" << now << endl;
-					for (unsigned int i = 0; i < min(C, len); i++) {
-						c.graph[now]->cuts[k].insert(Cuts[k][i].names);
-						//cout << Cuts[i].mindep << endl;
-					}
-				}
-				//if (c.graph[now]->pre.size() != 1)
-				c.graph[now]->cuts[1].insert(set<string> { now });
-				sort(Ct.begin(), Ct.end(), cmp_Area);
-				if (Ct.size() == 0 || Ct[0].Area > Area_mem)
-					c.graph[now]->Rcut = Rcut_mem;
-				else {
-					//c.graph[now]->AreaFlow = Ct[0].AreaFlow;
-					c.graph[now]->mindep = Ct[0].mindep;
-					unsigned int Ctmp = Ct.size();
-					c.graph[now]->Rcut = Ct[0].names;
-					c.graph[now]->Fcut = Ct[0];
-				}
-				vis.clear();
-				if (used[now])
-					referrence(c, now);
-			}
+            for (string now : Top) {
+                if (c.graph[now]->pre.size() == 0)
+                    continue;
+                //c.graph[now]->cuts[1].insert(set<string> { now });
+                assert(c.graph[now]->pre.size() <= 2);
+                if (c.graph[now]->pre.size() == 2) {
+                    string input1 = c.graph[now]->pre[0];
+                    string input2 = c.graph[now]->pre[1];
+                    for (int t = 1; t <= Luts; t++)
+                        for (set<string> c1 : c.graph[input1]->cuts[t]) {
+                            for (int k = 1; k <= Luts; k++)
+                                for (set<string> c2 : c.graph[input2]->cuts[k]) {
+                                    set<string> st = c1;
+                                    st.insert(c2.begin(), c2.end());
+                                    if (st.size() > (unsigned) Luts)
+                                        continue;
+                                    c.graph[now]->cuts[st.size()].insert(st);
+                                }
+                        }
+                }
 
-		}
+                if (c.graph[now]->pre.size() == 1) {
+                    string input1 = c.graph[now]->pre[0];
+                    for (int k = 1; k <= Luts; k++)
+                        for (set<string> c1 : c.graph[input1]->cuts[k])
+                            c.graph[now]->cuts[k].insert(c1);
+                }
+
+                set<string> Rcut_mem = c.graph[now]->Rcut;
+                int Area_mem = 0;
+
+                if (used[now])
+                    Dereference(c, now, Area_mem);
+
+                /*Calculate dep, areaflow, exact area*/
+                vector<Cut> Cuts[10], Ct;
+                for (int k = 1; k <= Luts; k++) {
+                    for (set<string> ct : c.graph[now]->cuts[k]) {
+                        int dep = 0, area = 0, fin = 0;
+                        double AF = c.graph[now]->Area;
+                        for (string nt : ct) {
+                            dep = max(dep, c.graph[nt]->mindep);
+                            fin += counter[nt];
+                        }
+                        dep++;
+                        if (dep > c.graph[now]->mindep)
+                            continue;
+                        c.graph[now]->Rcut = ct;
+                        area = getArea(c, now);
+                        //printf("%d\n", area);
+                        Cuts[k].push_back(Cut(ct, now, dep, area, fin, AF));
+                        Ct.push_back(Cut(ct, now, dep, area, fin, AF));
+                    }
+                }
+                for (int k = 1; k <= Luts; k++) {
+                    sort(Cuts[k].begin(), Cuts[k].end(), cmp_Area);
+                    c.graph[now]->cuts[k].clear();
+                    unsigned int len = Cuts[k].size();
+                    //cout << "now:" << now << endl;
+                    for (unsigned int i = 0; i < min(C, len); i++) {
+                        c.graph[now]->cuts[k].insert(Cuts[k][i].names);
+                        //cout << Cuts[i].mindep << endl;
+                    }
+                }
+                //if (c.graph[now]->pre.size() != 1)
+                c.graph[now]->cuts[1].insert(set<string> { now });
+                sort(Ct.begin(), Ct.end(), cmp_Area);
+                if (Ct.size() == 0 || Ct[0].Area > Area_mem)
+                    c.graph[now]->Rcut = Rcut_mem;
+                else {
+                    //c.graph[now]->AreaFlow = Ct[0].AreaFlow;
+                    c.graph[now]->mindep = Ct[0].mindep;
+                    unsigned int Ctmp = Ct.size();
+                    c.graph[now]->Rcut = Ct[0].names;
+                    c.graph[now]->Fcut = Ct[0];
+                }
+                vis.clear();
+                if (used[now])
+                    reference(c, now);
+            }
+
+        }
 
         pair<int, int> single = Output(c);
         pair<int, int> dual = Output2(c);
 
-		Refine *match1, *match2;
-		pair<vector<int>, vector<int> > lut_display;
-		match1 = new Refine();
-		match2 = new Refine();
-		int v1 = match1->getMatch(outdir + "/" + str + ".out1");
-		int v2 = match2->getMatch(outdir + "/" + str + ".out2");
-		int Refine_res = min(v1, v2);
-		printf("%d %d %s\n", v1, v2, (outdir + "/" + str + ".out").c_str());
-		if (v1 < v2)
-			lut_display = match1->output(outdir + "/" + str + ".out");
-		else
-			lut_display = match2->output(outdir + "/" + str + ".out");
+        Refine *match1, *match2;
+        pair<vector<int>, vector<int> > lut_display;
+        match1 = new Refine();
+        match2 = new Refine();
+        int v1 = match1->getMatch(outdir + "/" + str + ".out1");
+        int v2 = match2->getMatch(outdir + "/" + str + ".out2");
+        int Refine_res = min(v1, v2);
+        printf("%d %d %s\n", v1, v2, (outdir + "/" + str + ".out").c_str());
+        if (v1 < v2)
+            lut_display = match1->output(outdir + "/" + str + ".out");
+        else
+            lut_display = match2->output(outdir + "/" + str + ".out");
 
-		clock_t finish = clock();
-		
+        clock_t finish = clock();
+
         fout << str.substr(0, str.find(".")) << ',' << c.input.size() << ',' << c.output.size() << ','
                 << c.graph.size() << ',' << single.first << ',' << single.second << ',' << dual.first << ','
-			 << dual.second << "," << Refine_res << "," << c.abc_res.second.second << "," << c.abc_res.first << "," << c.abc_res.second.first  << "," <<  (double) (IF_END - start) / CLOCKS_PER_SEC << "," << (double) (finish - IF_END) / CLOCKS_PER_SEC<< endl;
-		fout1 << str.substr(0, str.find("."));
-		for (int i = 1; i <= 6; i++)
-			fout1 << "," << lut_display.first[i];
-		fout1 << endl;
-		fout2 << str.substr(0, str.find("."));
-		for (int i = 1; i <= 6; i++)
-			fout2 << "," << lut_display.second[i];
-		fout2 << endl;
+                << dual.second << "," << Refine_res << "," << c.abc_res.second.second << ","
+                << c.abc_res.first << "," << c.abc_res.second.first << ","
+                << (double) (IF_END - start) / CLOCKS_PER_SEC << ","
+                << (double) (finish - IF_END) / CLOCKS_PER_SEC << endl;
+        fout1 << str.substr(0, str.find("."));
+        for (int i = 1; i <= 6; i++)
+            fout1 << "," << lut_display.first[i];
+        fout1 << endl;
+        fout2 << str.substr(0, str.find("."));
+        for (int i = 1; i <= 6; i++)
+            fout2 << "," << lut_display.second[i];
+        fout2 << endl;
         total_time = (double) (finish - start) / CLOCKS_PER_SEC;
         cout << "Run time = " << total_time << "s" << endl;
     }
-	
+
     fout.close();
     return 0;
 }
