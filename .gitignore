@@ -1,6 +1,6 @@
-result
-bin
-object
+*/result
+*/bin
+*/object
 tmp.*
 .cproject
 .project

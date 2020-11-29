@@ -10,26 +10,6 @@ using namespace std;
 
 const int N = 1000005;
 
-/*vector<string> Match::splits(string str, string separator) {    // split a string by the separator
- vector<string> dest;
- string substring;
- string::size_type start = 0, index;
- do {
- index = str.find_first_of(separator, start);
- if (index != string::npos) {
- substring = str.substr(start, index - start);
- dest.push_back(substring);
- start = str.find_first_not_of(separator, index);
- if (start == string::npos) {
- return dest;
- }
- }
- } while (index != string::npos);
- substring = str.substr(start);  // the last substring
- dest.push_back(substring);
- return dest;
- }*/
-
 struct Match {
     int u[N], v[N], next[N];
     int n, m, ans, cnt, MK;

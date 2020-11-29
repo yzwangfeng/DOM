@@ -423,11 +423,9 @@ int main(int argc, char *argv[]) {
             //if (c.graph[now]->pre.size() != 1)
             c.graph[now]->cuts[1].insert(set<string> { now });
             sort(Ct.begin(), Ct.end(), cmp_Depth);
-            int Depth = Ct[0].mindep;
             c.graph[now]->mindep = Ct[0].mindep;
             c.graph[now]->AreaFlow = Ct[0].AreaFlow;
             c.graph[now]->Area = Ct[0].Area;
-            unsigned int Ctmp = Ct.size();
             c.graph[now]->Rcut = Ct[0].names;
             c.graph[now]->Fcut = Ct[0];
         }
@@ -519,7 +517,6 @@ int main(int argc, char *argv[]) {
                 else {
                     c.graph[now]->AreaFlow = Ct[0].AreaFlow;
                     c.graph[now]->mindep = Ct[0].mindep;
-                    unsigned int Ctmp = Ct.size();
                     c.graph[now]->Rcut = Ct[0].names;
                     c.graph[now]->Fcut = Ct[0];
                 }
@@ -609,7 +606,6 @@ int main(int argc, char *argv[]) {
                 else {
                     //c.graph[now]->AreaFlow = Ct[0].AreaFlow;
                     c.graph[now]->mindep = Ct[0].mindep;
-                    unsigned int Ctmp = Ct.size();
                     c.graph[now]->Rcut = Ct[0].names;
                     c.graph[now]->Fcut = Ct[0];
                 }

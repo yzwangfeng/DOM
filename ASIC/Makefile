@@ -6,7 +6,7 @@ DIR_BIN = ./bin
 SRC = $(wildcard ${DIR_SRC}/*.cpp)  
 OBJ = $(patsubst %.cpp,${DIR_OBJ}/%.o,$(notdir ${SRC})) 
 
-TARGET = DOLM
+TARGET = DOGM
 
 BIN_TARGET = ${DIR_BIN}/${TARGET}
 
@@ -14,7 +14,7 @@ CC = c++
 
 CFLAGS = -O3 -std=c++1y -Wall -m64 -march=native -I${DIR_INC}
 
-MY_LIBS   = -ldl -rdynamic -lreadline -ltermcap -lpthread -L./lib/ -labc
+MY_LIBS   = -ldl -rdynamic -lreadline -ltermcap -lpthread -L../lib/ -labc
 
 LDFLAGS   = -lm
 
